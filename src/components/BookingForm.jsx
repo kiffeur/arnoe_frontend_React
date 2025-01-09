@@ -1,10 +1,20 @@
 import React from 'react';
-import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { 
+  FaCalendarAlt, 
+  FaMapMarkerAlt, 
+  FaUser, 
+  FaEnvelope, 
+  FaPhone, 
+  FaMobileAlt,  
+  FaCreditCard,  
+  FaWallet      
+} from 'react-icons/fa';
 import { cameroonCities } from '../data/cities';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { fr } from 'date-fns/locale';
+import { FcSimCardChip } from 'react-icons/fc';
 
 const BookingForm = ({ 
   car,
@@ -22,6 +32,18 @@ const BookingForm = ({
   isSubmitting
 }) => {
   const { t, i18n } = useTranslation();
+
+  // Function to get mobile money icon color
+  const getMobileMoneyIconColor = () => {
+    switch(mobileOperator) {
+      case 'mtn':
+        return 'text-yellow-500';
+      case 'orange':
+        return 'text-orange-500';
+      default:
+        return 'text-gray-400';
+    }
+  };
 
   const handleDateChange = (date, name) => {
     handleInputChange({
@@ -186,8 +208,17 @@ const BookingForm = ({
           {t('bookingForm.paymentMethod')}
         </h3>
         
-        <div className="space-y-4">
-          <div className="flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Mobile Money Option */}
+          <label 
+            htmlFor="mobile" 
+            className={`
+              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+              ${paymentMethod === 'mobile' 
+                ? 'bg-yellow-50 border-yellow-500 text-yellow-700' 
+                : 'bg-white border-gray-200 text-gray-600 hover:border-yellow-300'}
+            `}
+          >
             <input
               type="radio"
               id="mobile"
@@ -195,57 +226,101 @@ const BookingForm = ({
               value="mobile"
               checked={paymentMethod === 'mobile'}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              className="h-4 w-4 text-blue-600"
+              className="hidden"
             />
-            <label htmlFor="mobile" className="ml-2 text-gray-700">
+            <FaMobileAlt className="text-4xl mb-3 text-yellow-600" />
+            <span className="font-semibold text-sm">
               {t('bookingForm.mobileMoney')}
-            </label>
-          </div>
+            </span>
+          </label>
 
-          {paymentMethod === 'mobile' && (
-            <div className="ml-6 space-y-4">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="orange"
-                  name="operator"
-                  value="orange"
-                  checked={mobileOperator === 'orange'}
-                  onChange={(e) => setMobileOperator(e.target.value)}
-                  className="h-4 w-4 text-blue-600"
-                />
-                <label htmlFor="orange" className="ml-2 text-gray-700">Orange Money</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="mtn"
-                  name="operator"
-                  value="mtn"
-                  checked={mobileOperator === 'mtn'}
-                  onChange={(e) => setMobileOperator(e.target.value)}
-                  className="h-4 w-4 text-blue-600"
-                />
-                <label htmlFor="mtn" className="ml-2 text-gray-700">MTN Mobile Money</label>
-              </div>
-            </div>
-          )}
-
-          <div className="flex items-center">
+          {/* Credit Card Option */}
+          <label 
+            htmlFor="creditCard" 
+            className={`
+              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+              ${paymentMethod === 'creditCard' 
+                ? 'bg-blue-50 border-blue-500 text-blue-700' 
+                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-300'}
+            `}
+          >
             <input
               type="radio"
-              id="bank"
+              id="creditCard"
               name="paymentMethod"
-              value="bank"
-              checked={paymentMethod === 'bank'}
+              value="creditCard"
+              checked={paymentMethod === 'creditCard'}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              className="h-4 w-4 text-blue-600"
+              className="hidden"
             />
-            <label htmlFor="bank" className="ml-2 text-gray-700">
-              {t('bookingForm.bankTransfer')}
-            </label>
-          </div>
+            <FaCreditCard className="text-4xl mb-3 text-blue-600" />
+            <span className="font-semibold text-sm">
+              {t('bookingForm.creditCard')}
+            </span>
+          </label>
+
+          {/* Cash Option */}
+          <label 
+            htmlFor="cash" 
+            className={`
+              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+              ${paymentMethod === 'cash' 
+                ? 'bg-green-50 border-green-500 text-green-700' 
+                : 'bg-white border-gray-200 text-gray-600 hover:border-green-300'}
+            `}
+          >
+            <input
+              type="radio"
+              id="cash"
+              name="paymentMethod"
+              value="cash"
+              checked={paymentMethod === 'cash'}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="hidden"
+            />
+            <FaWallet className="text-4xl mb-3 text-green-600" />
+            <span className="font-semibold text-sm">
+              {t('bookingForm.cash')}
+            </span>
+          </label>
         </div>
+
+        {/* Mobile Operator Selection for Mobile Money */}
+        {paymentMethod === 'mobile' && (
+          <div className="mt-4">
+            <label className="block text-sm text-gray-600 mb-2">
+              {t('bookingForm.mobileOperator')}
+            </label>
+            <div className="flex items-center space-x-4">
+              <select
+                value={mobileOperator}
+                onChange={(e) => setMobileOperator(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              >
+                <option value="">{t('bookingForm.selectOperator')}</option>
+                <option value="mtn">MTN Mobile Money</option>
+                <option value="orange">Orange Money</option>
+              </select>
+              
+              {/* Dynamic Mobile Money Operator Icon */}
+              {mobileOperator && (
+                <div className="flex items-center space-x-2">
+                  <FcSimCardChip className={`text-3xl ${getMobileMoneyIconColor()}`} />
+                  {mobileOperator === 'mtn' && (
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
+                      M
+                    </div>
+                  )}
+                  {mobileOperator === 'orange' && (
+                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
+                      O
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center mb-6">
