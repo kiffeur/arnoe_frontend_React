@@ -201,6 +201,25 @@
     "printReceipt": "Beleg drucken",
     "backToHome": "Zurück zur Startseite"
   },
+  "accommodation": {
+    "title": "Wählen Sie Ihre Unterkunft",
+    "subtitle": "Erleben Sie Komfort und Luxus mit unseren Premium-Unterkunftsoptionen",
+    "airbnb": {
+      "title": "Airbnb",
+      "description": "Entdecken Sie einzigartige Unterkünfte und Erlebnisse in lokalen Nachbarschaften.",
+      "button": "Airbnb durchsuchen"
+    },
+    "hotel": {
+      "title": "Hotels",
+      "description": "Erleben Sie Luxus und Komfort in unseren Partnerhotels.",
+      "button": "Hotels finden"
+    },
+    "modal": {
+      "title": "Service in Wartung",
+      "description": "Wir arbeiten hart daran, diesen Service zu verbessern. Bitte schauen Sie später wieder vorbei!",
+      "button": "Verstanden!"
+    }
+  },
   "footer": {
     "description": "Ihr vertrauenswürdiger Partner für Reisen in Kamerun. Professioneller Fahrer-Service rund um die Uhr verfügbar.",
     "quickLinks": "Schnelle Links",

@@ -216,5 +216,24 @@
     "downloadPdf": "Download PDF",
     "printReceipt": "Print Receipt",
     "backToHome": "Back to Home"
+  },
+  "accommodation": {
+    "title": "Choose Your Stay",
+    "subtitle": "Experience comfort and luxury with our premium accommodation options",
+    "airbnb": {
+      "title": "Airbnb",
+      "description": "Discover unique stays and experiences in local neighborhoods.",
+      "button": "Browse Airbnb"
+    },
+    "hotel": {
+      "title": "Hotels",
+      "description": "Experience luxury and comfort in our partner hotels.",
+      "button": "Find Hotels"
+    },
+    "modal": {
+      "title": "Service Under Maintenance",
+      "description": "We're working hard to improve this service. Please check back later!",
+      "button": "Got it!"
+    }
   }
 }

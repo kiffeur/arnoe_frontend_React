@@ -226,5 +226,24 @@
     "downloadPdf": "Télécharger le PDF",
     "printReceipt": "Imprimer le Reçu",
     "backToHome": "Retour à l'Accueil"
+  },
+  "accommodation": {
+    "title": "Choisissez Votre Hébergement",
+    "subtitle": "Vivez le confort et le luxe avec nos options d'hébergement premium",
+    "airbnb": {
+      "title": "Airbnb",
+      "description": "Découvrez des hébergements uniques et des expériences dans des quartiers locaux.",
+      "button": "Parcourir Airbnb"
+    },
+    "hotel": {
+      "title": "Hôtels",
+      "description": "Vivez le luxe et le confort dans nos hôtels partenaires.",
+      "button": "Trouver des Hôtels"
+    },
+    "modal": {
+      "title": "Service en Maintenance",
+      "description": "Nous travaillons dur pour améliorer ce service. Revenez plus tard !",
+      "button": "Compris !"
+    }
   }
 }

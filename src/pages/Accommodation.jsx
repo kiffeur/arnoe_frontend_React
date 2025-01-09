@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Accommodation = () => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -65,7 +67,7 @@ const Accommodation = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl font-bold text-center text-gray-900 mb-6"
           >
-            Choose Your Stay
+            {t('accommodation.title')}
           </motion.h1>
           
           <motion.p
@@ -74,7 +76,7 @@ const Accommodation = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto"
           >
-            Experience comfort and luxury with our premium accommodation options
+            {t('accommodation.subtitle')}
           </motion.p>
           
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -100,16 +102,18 @@ const Accommodation = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </motion.div>
                 <div className="p-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Airbnb</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    {t('accommodation.airbnb.title')}
+                  </h2>
                   <p className="text-gray-600 text-lg mb-6">
-                    Discover unique stays and experiences in local neighborhoods.
+                    {t('accommodation.airbnb.description')}
                   </p>
                   <motion.button 
                     variants={buttonVariants}
                     whileHover="hover"
                     className="w-full bg-gradient-to-r from-[#FF385C] to-[#E31C5F] text-white py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
                   >
-                    Browse Airbnb
+                    {t('accommodation.airbnb.button')}
                   </motion.button>
                 </div>
               </div>
@@ -137,16 +141,18 @@ const Accommodation = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </motion.div>
                 <div className="p-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Hotels</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    {t('accommodation.hotel.title')}
+                  </h2>
                   <p className="text-gray-600 text-lg mb-6">
-                    Experience luxury and comfort in our partner hotels.
+                    {t('accommodation.hotel.description')}
                   </p>
                   <motion.button 
                     variants={buttonVariants}
                     whileHover="hover"
                     className="w-full bg-gradient-to-r from-[#0F52BA] to-[#0A3D8F] text-white py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
                   >
-                    Find Hotels
+                    {t('accommodation.hotel.button')}
                   </motion.button>
                 </div>
               </div>
@@ -190,7 +196,7 @@ const Accommodation = () => {
                   transition={{ delay: 0.2 }}
                   className="text-2xl font-bold text-gray-900 mb-4"
                 >
-                  Service Under Maintenance
+                  {t('accommodation.modal.title')}
                 </motion.h3>
                 <motion.p 
                   initial={{ y: 20, opacity: 0 }}
@@ -198,15 +204,15 @@ const Accommodation = () => {
                   transition={{ delay: 0.3 }}
                   className="text-gray-600 mb-8 text-lg"
                 >
-                  We're working hard to improve this service. Please check back later!
+                  {t('accommodation.modal.description')}
                 </motion.p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => setShowModal(false)}
                   className="bg-gradient-to-r from-[#FF4D30] to-[#dc3a1e] text-white px-8 py-3 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Got it!
+                  {t('accommodation.modal.button')}
                 </motion.button>
               </div>
             </motion.div>
