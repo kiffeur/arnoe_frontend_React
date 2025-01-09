@@ -12,11 +12,21 @@ const Home = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <Benefits />
-      <CarTypes />
-      <RentalCars />
-      <HowItWorks />
-      <Testimonials />
+      <div id="benefits">
+        <Benefits />
+      </div>
+      <div id="car-types">
+        <CarTypes />
+      </div>
+      <div id="rental-cars">
+        <RentalCars />
+      </div>
+      <div id="how-it-works">
+        <HowItWorks />
+      </div>
+      <div id="testimonials">
+        <Testimonials />
+      </div>
       <Footer />
     </div>
   );

@@ -203,7 +203,12 @@
   },
   "footer": {
     "description": "Ihr vertrauenswürdiger Partner für Reisen in Kamerun. Professioneller Fahrer-Service rund um die Uhr verfügbar.",
-    "quickLinks": "Schnelllinks",
+    "quickLinks": "Schnelle Links",
+    "benefits": "Vorteile",
+    "carTypes": "Fahrzeugtypen",
+    "rentalCars": "Mietfahrzeuge",
+    "howItWorks": "Wie Es Funktioniert",
+    "testimonials": "Testimonials",
     "about": "Über uns",
     "services": "Dienstleistungen",
     "fleet": "Unsere Flotte",

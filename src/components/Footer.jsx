@@ -2,6 +2,7 @@ import { FaFacebookF, FaYoutube, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { FaPhoneVolume } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -9,6 +10,13 @@ const Footer = () => {
 
   const handleWhatsAppClick = (phone) => {
     window.open(`https://wa.me/${phone}`, '_blank');
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -31,10 +39,46 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">{t('footer.quickLinks')}</h3>
             <ul className="space-y-4">
-              <li><a href="#about" className="hover:text-[#FF4D30] transition-colors">{t('footer.about')}</a></li>
-              <li><a href="#services" className="hover:text-[#FF4D30] transition-colors">{t('footer.services')}</a></li>
-              <li><a href="#fleet" className="hover:text-[#FF4D30] transition-colors">{t('footer.fleet')}</a></li>
-              <li><a href="#contact" className="hover:text-[#FF4D30] transition-colors">{t('footer.contact')}</a></li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('benefits')} 
+                  className="hover:text-[#FF4D30] transition-colors text-left"
+                >
+                  {t('footer.benefits')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('car-types')} 
+                  className="hover:text-[#FF4D30] transition-colors text-left"
+                >
+                  {t('footer.carTypes')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('rental-cars')} 
+                  className="hover:text-[#FF4D30] transition-colors text-left"
+                >
+                  {t('footer.rentalCars')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')} 
+                  className="hover:text-[#FF4D30] transition-colors text-left"
+                >
+                  {t('footer.howItWorks')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('testimonials')} 
+                  className="hover:text-[#FF4D30] transition-colors text-left"
+                >
+                  {t('footer.testimonials')}
+                </button>
+              </li>
             </ul>
           </div>
 

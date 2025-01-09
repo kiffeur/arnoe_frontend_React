@@ -115,6 +115,11 @@
   "footer": {
     "description": "Votre partenaire de confiance pour vos déplacements au Cameroun. Service de voiture avec chauffeur professionnel disponible 24/7.",
     "quickLinks": "Liens Rapides",
+    "benefits": "Avantages",
+    "carTypes": "Types de Voitures",
+    "rentalCars": "Voitures de Location",
+    "howItWorks": "Comment Ça Marche",
+    "testimonials": "Témoignages",
     "about": "À Propos",
     "services": "Services",
     "fleet": "Notre Flotte",
