@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+     @apply text-gray-800 antialiased;
+  }
+}
+
+/* Swiper Customization */
+.swiper-pagination-bullet {
+  @apply bg-primary opacity-50 w-2.5 h-2.5;
+}
+
+.swiper-pagination-bullet-active {
+  @apply opacity-100;
+}
+
+/* AOS Customization */
+[data-aos] {
+  pointer-events: none;
+}
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}

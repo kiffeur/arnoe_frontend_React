@@ -1,0 +1,40 @@
+{
+  "name": "remons-react",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "serve -s dist"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.1",
+    "@types/react-datepicker": "^6.2.0",
+    "aos": "^2.3.4",
+    "framer-motion": "^11.16.0",
+    "react": "^18.2.0",
+    "react-datepicker": "^7.5.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.4.0",
+    "react-image-gallery": "^1.3.0",
+    "react-router-dom": "^7.1.1",
+    "react-toastify": "^11.0.2",
+    "serve": "^14.2.4",
+    "swiper": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.0.8"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
