@@ -1,6 +1,10 @@
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { cameroonCities } from '../data/cities';
+import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import { fr } from 'date-fns/locale';
 
 const BookingForm = ({ 
   car,
@@ -17,17 +21,28 @@ const BookingForm = ({
   setShowTerms,
   isSubmitting
 }) => {
+  const { t, i18n } = useTranslation();
+
+  const handleDateChange = (date, name) => {
+    handleInputChange({
+      target: {
+        name,
+        value: date ? date.toISOString().split('T')[0] : ''
+      }
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-6">
-          Informations personnelles
+          {t('bookingForm.personalInfo')}
         </h3>
         
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Prénom
+              {t('bookingForm.firstName')}
             </label>
             <input
               type="text"
@@ -35,14 +50,14 @@ const BookingForm = ({
               value={bookingForm.firstName}
               onChange={handleInputChange}
               className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Votre prénom"
+              placeholder={t('bookingForm.firstNamePlaceholder')}
               required
             />
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Nom
+              {t('bookingForm.lastName')}
             </label>
             <input
               type="text"
@@ -50,7 +65,7 @@ const BookingForm = ({
               value={bookingForm.lastName}
               onChange={handleInputChange}
               className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Votre nom"
+              placeholder={t('bookingForm.lastNamePlaceholder')}
               required
             />
           </div>
@@ -58,7 +73,7 @@ const BookingForm = ({
 
         <div className="mb-4">
           <label className="block text-sm text-gray-600 mb-1">
-            Email
+            {t('bookingForm.email')}
           </label>
           <input
             type="email"
@@ -66,14 +81,14 @@ const BookingForm = ({
             value={bookingForm.email}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="votre@email.com"
+            placeholder={t('bookingForm.emailPlaceholder')}
             required
           />
         </div>
 
         <div>
           <label className="block text-sm text-gray-600 mb-1">
-            Téléphone
+            {t('bookingForm.phone')}
           </label>
           <input
             type="tel"
@@ -81,7 +96,7 @@ const BookingForm = ({
             value={bookingForm.phone}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="+237 6XX XX XX XX"
+            placeholder={t('bookingForm.phonePlaceholder')}
             required
           />
         </div>
@@ -89,13 +104,13 @@ const BookingForm = ({
 
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-6">
-          Détails de la réservation
+          {t('bookingForm.bookingDetails')}
         </h3>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Ville de départ
+              {t('bookingForm.departureCity')}
             </label>
             <input
               type="text"
@@ -107,7 +122,7 @@ const BookingForm = ({
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Ville de retour
+              {t('bookingForm.returnCity')}
             </label>
             <input
               type="text"
@@ -120,7 +135,7 @@ const BookingForm = ({
 
         <div className="mb-4">
           <label className="block text-sm text-gray-600 mb-1">
-            Adresse de résidence à Douala
+            {t('bookingForm.pickupLocation')}
           </label>
           <input
             type="text"
@@ -128,7 +143,7 @@ const BookingForm = ({
             value={bookingForm.pickupQuarter}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Votre adresse complète"
+            placeholder={t('bookingForm.pickupLocationPlaceholder')}
             required
           />
         </div>
@@ -136,31 +151,31 @@ const BookingForm = ({
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Date de début
+              {t('bookingForm.pickupDate')}
             </label>
-            <input
-              type="date"
-              name="pickupDate"
-              value={bookingForm.pickupDate}
-              onChange={handleInputChange}
+            <DatePicker
+              selected={bookingForm.pickupDate ? new Date(bookingForm.pickupDate) : null}
+              onChange={(date) => handleDateChange(date, 'pickupDate')}
               className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-              min={new Date().toISOString().split('T')[0]}
+              placeholderText={t('bookingForm.pickupDate')}
+              dateFormat="dd/MM/yyyy"
+              locale={i18n.language === 'fr' ? fr : undefined}
+              minDate={new Date()}
             />
           </div>
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">
-              Date de fin
+              {t('bookingForm.dropoffDate')}
             </label>
-            <input
-              type="date"
-              name="dropoffDate"
-              value={bookingForm.dropoffDate}
-              onChange={handleInputChange}
+            <DatePicker
+              selected={bookingForm.dropoffDate ? new Date(bookingForm.dropoffDate) : null}
+              onChange={(date) => handleDateChange(date, 'dropoffDate')}
               className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-              min={bookingForm.pickupDate || new Date().toISOString().split('T')[0]}
+              placeholderText={t('bookingForm.dropoffDate')}
+              dateFormat="dd/MM/yyyy"
+              locale={i18n.language === 'fr' ? fr : undefined}
+              minDate={bookingForm.pickupDate ? new Date(bookingForm.pickupDate) : new Date()}
             />
           </div>
         </div>
@@ -168,90 +183,94 @@ const BookingForm = ({
 
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-6">
-          Mode de paiement
+          {t('bookingForm.paymentMethod')}
         </h3>
         
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <button
-            type="button"
-            onClick={() => {
-              setPaymentMethod('bank');
-              setMobileOperator('');
-            }}
-            className={`px-4 py-3 rounded-lg border-2 transition-colors ${
-              paymentMethod === 'bank'
-                ? 'border-blue-600 bg-blue-50 text-blue-600'
-                : 'border-gray-200 hover:border-blue-600'
-            }`}
-          >
-            Virement Bancaire
-          </button>
-          
-          <button
-            type="button"
-            onClick={() => setPaymentMethod('mobile')}
-            className={`px-4 py-3 rounded-lg border-2 transition-colors ${
-              paymentMethod === 'mobile'
-                ? 'border-blue-600 bg-blue-50 text-blue-600'
-                : 'border-gray-200 hover:border-blue-600'
-            }`}
-          >
-            Mobile Money
-          </button>
-        </div>
-
-        {paymentMethod === 'mobile' && (
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              type="button"
-              onClick={() => setMobileOperator('orange')}
-              className={`px-4 py-3 rounded-lg border-2 transition-colors ${
-                mobileOperator === 'orange'
-                  ? 'border-orange-600 bg-orange-50 text-orange-600'
-                  : 'border-gray-200 hover:border-orange-600'
-              }`}
-            >
-              Orange Money
-            </button>
-            
-            <button
-              type="button"
-              onClick={() => setMobileOperator('mtn')}
-              className={`px-4 py-3 rounded-lg border-2 transition-colors ${
-                mobileOperator === 'mtn'
-                  ? 'border-yellow-600 bg-yellow-50 text-yellow-600'
-                  : 'border-gray-200 hover:border-yellow-600'
-              }`}
-            >
-              MTN Mobile Money
-            </button>
+        <div className="space-y-4">
+          <div className="flex items-center">
+            <input
+              type="radio"
+              id="mobile"
+              name="paymentMethod"
+              value="mobile"
+              checked={paymentMethod === 'mobile'}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="h-4 w-4 text-blue-600"
+            />
+            <label htmlFor="mobile" className="ml-2 text-gray-700">
+              {t('bookingForm.mobileMoney')}
+            </label>
           </div>
-        )}
+
+          {paymentMethod === 'mobile' && (
+            <div className="ml-6 space-y-4">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="orange"
+                  name="operator"
+                  value="orange"
+                  checked={mobileOperator === 'orange'}
+                  onChange={(e) => setMobileOperator(e.target.value)}
+                  className="h-4 w-4 text-blue-600"
+                />
+                <label htmlFor="orange" className="ml-2 text-gray-700">Orange Money</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="mtn"
+                  name="operator"
+                  value="mtn"
+                  checked={mobileOperator === 'mtn'}
+                  onChange={(e) => setMobileOperator(e.target.value)}
+                  className="h-4 w-4 text-blue-600"
+                />
+                <label htmlFor="mtn" className="ml-2 text-gray-700">MTN Mobile Money</label>
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center">
+            <input
+              type="radio"
+              id="bank"
+              name="paymentMethod"
+              value="bank"
+              checked={paymentMethod === 'bank'}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="h-4 w-4 text-blue-600"
+            />
+            <label htmlFor="bank" className="ml-2 text-gray-700">
+              {t('bookingForm.bankTransfer')}
+            </label>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center mb-6">
         <input
           type="checkbox"
           id="terms"
           checked={termsAccepted}
           onChange={(e) => setTermsAccepted(e.target.checked)}
-          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          className="h-4 w-4 text-blue-600"
         />
-        <label htmlFor="terms" className="text-sm text-gray-600">
-          J'accepte les{' '}
+        <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+          {t('bookingForm.acceptTerms')}
           <button
             type="button"
             onClick={() => setShowTerms(true)}
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 hover:underline ml-1"
           >
-            conditions d'utilisation
+            {t('bookingForm.terms')}
           </button>
         </label>
       </div>
 
       <div className="bg-blue-50 p-6 rounded-lg mb-6">
         <div className="flex justify-between items-center">
-          <span className="text-gray-700">Prix total :</span>
+          <span className="text-gray-700">{t('bookingForm.total')}</span>
           <span className="text-2xl font-bold text-blue-600">{totalPrice} FCFA</span>
         </div>
         <p className="text-sm text-gray-500 mt-2">
@@ -275,10 +294,10 @@ const BookingForm = ({
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Traitement en cours...
+            {t('bookingForm.processing')}
           </div>
         ) : (
-          'Confirmer la réservation'
+          t('bookingForm.confirmBooking')
         )}
       </button>
     </div>

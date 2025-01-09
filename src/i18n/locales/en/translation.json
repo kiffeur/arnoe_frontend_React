@@ -121,5 +121,94 @@
     "servedRegions": "Served Regions",
     "followUs": "Follow Us",
     "rights": "All rights reserved."
+  },
+  "carDetail": {
+    "aboutVehicle": "About this vehicle",
+    "features": {
+      "airConditioning": "Air conditioning",
+      "backupCamera": "Backup camera",
+      "touchScreen": "Touch screen",
+      "seats": "seats",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "similarCars": "Similar Cars",
+    "bookNow": "Book Now",
+    "perDay": "/ day",
+    "reviews": "Reviews",
+    "doors": "Doors",
+    "errors": {
+      "acceptTerms": "Please accept the terms of use",
+      "selectPayment": "Please select a payment method",
+      "selectOperator": "Please select a mobile operator",
+      "bookingError": "An error occurred during booking",
+      "loadingError": "Error loading car"
+    },
+    "success": {
+      "booking": "Booking successful!"
+    },
+    "descriptions": {
+      "berline": "An elegant and comfortable sedan, perfect for city travel and long journeys. Equipped with all modern amenities to ensure your comfort.",
+      "suv": "A spacious and versatile SUV, ideal for families and groups. Perfect for both urban roads and more challenging terrain.",
+      "pickup": "A robust and reliable pickup, suitable for rough terrain and heavy loads. Perfect for professionals and adventurers.",
+      "premium": "A high-end car combining luxury and performance. Equipped with the latest technology for an exceptional driving experience."
+    }
+  },
+  "bookingForm": {
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "firstNamePlaceholder": "Your first name",
+    "lastNamePlaceholder": "Your last name",
+    "emailPlaceholder": "your@email.com",
+    "phonePlaceholder": "+237 6XX XX XX XX",
+    "bookingDetails": "Booking Details",
+    "departureCity": "Departure City",
+    "returnCity": "Return City",
+    "pickupLocation": "Residence Address in Douala",
+    "pickupLocationPlaceholder": "Your complete address",
+    "pickupDate": "Start Date",
+    "dropoffDate": "End Date",
+    "paymentMethod": "Payment Method",
+    "mobileMoney": "Mobile Money",
+    "bankTransfer": "Bank Transfer",
+    "acceptTerms": "I accept the",
+    "terms": "terms of use",
+    "total": "Total Price",
+    "processing": "Processing...",
+    "confirmBooking": "Confirm Booking"
+  },
+  "bookingSummary": {
+    "title": "Booking Summary",
+    "bookingDetails": "Booking Details",
+    "car": "Car",
+    "pickupDate": "Pickup Date",
+    "returnDate": "Return Date",
+    "pickupLocation": "Pickup Location",
+    "returnLocation": "Return Location",
+    "duration": "Duration",
+    "days": "days",
+    "customerInfo": "Customer Information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "paymentDetails": "Payment Details",
+    "dailyRate": "Daily Rate",
+    "totalDays": "Total Days",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "paymentMethod": "Payment Method",
+    "mobileMoneyNumber": "Mobile Money Number",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "downloadPdf": "Download PDF",
+    "printReceipt": "Print Receipt",
+    "backToHome": "Back to Home"
   }
 }

@@ -102,16 +102,6 @@ const SearchResults = () => {
       return false;
     }
 
-    // Filtre par transmission
-    if (filters.transmission && car.transmission.toLowerCase() !== filters.transmission.toLowerCase()) {
-      return false;
-    }
-
-    // Filtre par type de carburant
-    if (filters.fuelType && car.fuelType.toLowerCase() !== filters.fuelType.toLowerCase()) {
-      return false;
-    }
-
     // Filtres des options
     if (filters.hasAC && !car.hasAC) return false;
     if (filters.hasRearCamera && !car.hasRearCamera) return false;
@@ -199,36 +189,6 @@ const SearchResults = () => {
                   <option value="4">4 places</option>
                   <option value="5">5 places</option>
                   <option value="7">7 places</option>
-                </select>
-              </div>
-
-              {/* Transmission */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Transmission</label>
-                <select 
-                  name="transmission"
-                  value={filters.transmission}
-                  onChange={handleFilterChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
-                >
-                  <option value="">Toutes</option>
-                  <option value="Manuelle">Manuelle</option>
-                  <option value="Automatique">Automatique</option>
-                </select>
-              </div>
-
-              {/* Type de carburant */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Carburant</label>
-                <select 
-                  name="fuelType"
-                  value={filters.fuelType}
-                  onChange={handleFilterChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
-                >
-                  <option value="">Tous</option>
-                  <option value="Essence">Essence</option>
-                  <option value="Diesel">Diesel</option>
                 </select>
               </div>
 
@@ -328,36 +288,6 @@ const SearchResults = () => {
                       </select>
                     </div>
 
-                    {/* Transmission */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Transmission</label>
-                      <select 
-                        name="transmission"
-                        value={filters.transmission}
-                        onChange={handleFilterChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
-                      >
-                        <option value="">Toutes</option>
-                        <option value="Manuelle">Manuelle</option>
-                        <option value="Automatique">Automatique</option>
-                      </select>
-                    </div>
-
-                    {/* Type de carburant */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Carburant</label>
-                      <select 
-                        name="fuelType"
-                        value={filters.fuelType}
-                        onChange={handleFilterChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
-                      >
-                        <option value="">Tous</option>
-                        <option value="Essence">Essence</option>
-                        <option value="Diesel">Diesel</option>
-                      </select>
-                    </div>
-
                     {/* Options supplémentaires */}
                     <div className="space-y-3">
                       <label className="block text-sm font-medium text-gray-700 mb-2">Options</label>
@@ -451,14 +381,6 @@ const SearchResults = () => {
                       <div className="flex items-center">
                         <FaUsers className="mr-2" />
                         <span>{car.seats} Places</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FaCar className="mr-2" />
-                        <span>{car.transmission}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FaGasPump className="mr-2" />
-                        <span>{car.fuelType}</span>
                       </div>
                       <div className="flex items-center">
                         <FaMountain className="mr-2" />

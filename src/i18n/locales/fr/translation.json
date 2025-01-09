@@ -132,5 +132,94 @@
     "email": "Email",
     "address": "Adresse",
     "rights": "Tous droits réservés."
+  },
+  "carDetail": {
+    "aboutVehicle": "À propos de ce véhicule",
+    "features": {
+      "airConditioning": "Climatisation",
+      "backupCamera": "Caméra de recul",
+      "touchScreen": "Écran tactile",
+      "seats": "places",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "similarCars": "Voitures Similaires",
+    "bookNow": "Réserver maintenant",
+    "perDay": "/ jour",
+    "reviews": "Avis",
+    "doors": "Portes",
+    "errors": {
+      "acceptTerms": "Veuillez accepter les conditions d'utilisation",
+      "selectPayment": "Veuillez sélectionner une méthode de paiement",
+      "selectOperator": "Veuillez sélectionner un opérateur mobile",
+      "bookingError": "Une erreur est survenue lors de la réservation",
+      "loadingError": "Erreur lors du chargement de la voiture"
+    },
+    "success": {
+      "booking": "Réservation effectuée avec succès !"
+    },
+    "descriptions": {
+      "berline": "Une berline élégante et confortable, parfaite pour les déplacements en ville et les longs trajets. Équipée de toutes les commodités modernes pour assurer votre confort.",
+      "suv": "Un SUV spacieux et polyvalent, idéal pour les familles et les groupes. Parfait pour les routes urbaines comme pour les terrains plus difficiles.",
+      "pickup": "Un pickup robuste et fiable, adapté aux terrains difficiles et au transport de charges lourdes. Parfait pour les professionnels et les aventuriers.",
+      "premium": "Une voiture haut de gamme alliant luxe et performance. Équipée des dernières technologies pour une expérience de conduite exceptionnelle."
+    }
+  },
+  "bookingForm": {
+    "personalInfo": "Informations personnelles",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "firstNamePlaceholder": "Votre prénom",
+    "lastNamePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "phonePlaceholder": "+237 6XX XX XX XX",
+    "bookingDetails": "Détails de la réservation",
+    "departureCity": "Ville de départ",
+    "returnCity": "Ville de retour",
+    "pickupLocation": "Adresse de résidence à Douala",
+    "pickupLocationPlaceholder": "Votre adresse complète",
+    "pickupDate": "Date de début",
+    "dropoffDate": "Date de fin",
+    "paymentMethod": "Mode de paiement",
+    "mobileMoney": "Mobile Money",
+    "bankTransfer": "Virement Bancaire",
+    "acceptTerms": "J'accepte les",
+    "terms": "conditions d'utilisation",
+    "total": "Prix total",
+    "processing": "Traitement en cours...",
+    "confirmBooking": "Confirmer la réservation"
+  },
+  "bookingSummary": {
+    "title": "Résumé de la Réservation",
+    "bookingDetails": "Détails de la Réservation",
+    "car": "Voiture",
+    "pickupDate": "Date de Prise en Charge",
+    "returnDate": "Date de Retour",
+    "pickupLocation": "Lieu de Prise en Charge",
+    "returnLocation": "Lieu de Retour",
+    "duration": "Durée",
+    "days": "jours",
+    "customerInfo": "Informations Client",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "paymentDetails": "Détails du Paiement",
+    "dailyRate": "Tarif Journalier",
+    "totalDays": "Nombre de Jours",
+    "subtotal": "Sous-total",
+    "tax": "TVA",
+    "total": "Total",
+    "paymentMethod": "Méthode de Paiement",
+    "mobileMoneyNumber": "Numéro Mobile Money",
+    "status": {
+      "pending": "En Attente",
+      "confirmed": "Confirmée",
+      "cancelled": "Annulée"
+    },
+    "downloadPdf": "Télécharger le PDF",
+    "printReceipt": "Imprimer le Reçu",
+    "backToHome": "Retour à l'Accueil"
   }
 }

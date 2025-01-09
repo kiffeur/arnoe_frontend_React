@@ -3,21 +3,25 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGasPump, FaCar, FaUsers, FaStar, FaSnowflake, FaCamera, FaTablet, FaMountain, FaMapMarkerAlt, FaCalendarAlt, FaPhoneAlt, FaEnvelope, FaCog } from 'react-icons/fa';
 import { MdArrowForward, MdArrowBack } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BookingForm from '../components/BookingForm';
 import TermsModal from '../components/TermsModal';
 import { getCarById, getAllCars } from '../services/api';
 import { createBooking } from '../services/bookingService';
+import { translateWithCache } from '../services/translationService';
 import { cameroonCities } from '../data/cities';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { toast } from 'react-toastify';
 
 const CarDetail = () => {
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [car, setCar] = useState(null);
+  const [translatedDescription, setTranslatedDescription] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [similarCars, setSimilarCars] = useState([]);
@@ -44,23 +48,38 @@ const CarDetail = () => {
       try {
         setLoading(true);
         const carData = await getCarById(id);
+        if (!carData) {
+          toast.error(t('carDetail.errors.loadingError'));
+          return;
+        }
         setCar(carData);
         
         // Fetch similar cars
         const allCars = await getAllCars();
         const similar = allCars
-          .filter(c => c.id !== parseInt(id) && c.type === carData.type)
+          .filter(c => c.category === carData.category && c.id !== parseInt(id))
           .slice(0, 3);
         setSimilarCars(similar);
         
         setLoading(false);
       } catch (error) {
-        console.error('Erreur lors du chargement de la voiture:', error);
-        setLoading(false);
+        console.error('Error loading car:', error);
+        toast.error(t('carDetail.errors.loadingError'));
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, t]);
+
+  useEffect(() => {
+    const translateDescription = async () => {
+      if (car?.description) {
+        const translated = await translateWithCache(car.description, i18n.language);
+        setTranslatedDescription(translated);
+      }
+    };
+
+    translateDescription();
+  }, [car?.description, i18n.language]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -88,21 +107,21 @@ const CarDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!termsAccepted) {
-      toast.error("Veuillez accepter les conditions d'utilisation");
+      toast.error(t('carDetail.errors.acceptTerms'));
       return;
     }
     if (!paymentMethod) {
-      toast.error("Veuillez sélectionner une méthode de paiement");
+      toast.error(t('carDetail.errors.selectPayment'));
       return;
     }
     if (paymentMethod === 'mobile' && !mobileOperator) {
-      toast.error("Veuillez sélectionner un opérateur mobile");
+      toast.error(t('carDetail.errors.selectOperator'));
       return;
     }
 
     setIsSubmitting(true);
     try {
-      // Préparer les données pour l'API
+      // Prepare data for API
       const bookingData = {
         firstName: bookingForm.firstName,
         lastName: bookingForm.lastName,
@@ -115,11 +134,11 @@ const CarDetail = () => {
         carId: parseInt(car.id),
         startDate: new Date(bookingForm.pickupDate).toISOString(),
         endDate: new Date(bookingForm.dropoffDate).toISOString(),
-        userId: 1, // À remplacer par l'ID réel de l'utilisateur une fois l'authentification implémentée
+        userId: 1, // Replace with real user ID once authentication is implemented
         totalPrice: totalPrice
       };
 
-      // Appeler l'API de réservation
+      // Call booking API
       const response = await createBooking({
         ...bookingForm,
         paymentMethod: paymentMethod === 'mobile' 
@@ -133,7 +152,7 @@ const CarDetail = () => {
         totalPrice: totalPrice
       });
 
-      // Rediriger vers la page de confirmation
+      // Redirect to booking summary page
       navigate('/booking-summary', { 
         state: { 
           bookingData: {
@@ -146,29 +165,29 @@ const CarDetail = () => {
             paymentMethod,
             paymentDetails: paymentMethod === 'mobile' ? 
               `Mobile Money (${mobileOperator === 'orange' ? 'Orange Money' : 'MTN Mobile Money'})` : 
-              'Virement Bancaire',
+              t('carDetail.bankTransfer'),
             bookingReference: response.id || 'REF-' + Date.now()
           } 
         } 
       });
 
-      toast.success('Réservation effectuée avec succès !');
+      toast.success(t('carDetail.success.booking'));
     } catch (error) {
       console.error('Booking error:', error);
-      toast.error(error.message || 'Une erreur est survenue lors de la réservation');
+      toast.error(t('carDetail.errors.bookingError'));
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const carFeatures = [
-    { icon: FaUsers, value: `${car?.seats} places` },
+    { icon: FaUsers, value: `${car?.seats} ${t('carDetail.features.seats')}` },
     { icon: FaCar, value: car?.transmission },
     { icon: FaGasPump, value: car?.fuelType },
     { icon: FaMountain, value: car?.is4x4 ? '4x4' : '2x4' },
-    { icon: FaSnowflake, value: car?.hasAC ? 'Oui' : 'Non' },
-    { icon: FaCamera, value: car?.hasRearCamera ? 'Oui' : 'Non' },
-    { icon: FaTablet, value: car?.hasTouchScreen ? 'Oui' : 'Non' }
+    { icon: FaSnowflake, value: car?.hasAC ? t('carDetail.features.yes') : t('carDetail.features.no') },
+    { icon: FaCamera, value: car?.hasRearCamera ? t('carDetail.features.yes') : t('carDetail.features.no') },
+    { icon: FaTablet, value: car?.hasTouchScreen ? t('carDetail.features.yes') : t('carDetail.features.no') }
   ];
 
   const images = [
@@ -202,12 +221,12 @@ const CarDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      {/* Espacement pour la navbar */}
+      {/* Spacer for navbar */}
       <div className="h-20"></div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="relative">
-          {/* Hero Section avec dégradé */}
+          {/* Hero Section with gradient */}
           <div className="bg-gradient-to-r from-blue-800 to-blue-600 p-8">
             <div className="flex items-center gap-2 text-white mb-2">
               <FaStar className="text-yellow-400" />
@@ -216,65 +235,58 @@ const CarDetail = () => {
             </div>
             <h1 className="text-3xl font-bold text-white">{car.name}</h1>
             <div className="absolute top-8 right-8 text-white text-3xl font-bold">
-              {car.pricePerDay} FCFA <span className="text-lg font-normal">/ jour</span>
+              {car.pricePerDay} FCFA <span className="text-lg font-normal">{t('carDetail.perDay')}</span>
             </div>
           </div>
 
-          {/* Contenu principal */}
+          {/* Main content */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
-            {/* Colonne gauche */}
+            {/* Left column */}
             <div className="bg-white p-6 shadow-lg">
-              {/* Galerie d'images */}
+              {/* Image gallery */}
               <ImageGallery items={images} showFullscreenButton={true} showPlayButton={false} />
 
               {/* Description */}
               <div className="mt-8">
-                <h2 className="text-xl font-semibold mb-4">À propos de ce véhicule</h2>
+                <h2 className="text-xl font-semibold mb-4">{t('carDetail.aboutVehicle')}</h2>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  {car.description}
+                  {car.category ? 
+                    t(`carDetail.descriptions.${car.category.toLowerCase()}`) : 
+                    translatedDescription || car.description
+                  }
                 </p>
 
-                {/* Caractéristiques */}
+                {/* Features */}
                 <div className="grid grid-cols-4 gap-4">
-                  <div className="flex flex-col items-center">
-                    <FaUsers className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{car.seats} places</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <FaCar className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{car.transmission}</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <FaGasPump className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{car.fuelType}</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <FaMountain className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{car.is4x4 ? '4x4' : '2x4'}</span>
-                  </div>
+                  {carFeatures.map((feature, index) => (
+                    <div key={index} className="flex flex-col items-center">
+                      <feature.icon className="text-blue-600 text-xl mb-2" />
+                      <span className="text-sm">{feature.value}</span>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 mt-8">
                   <div className="flex flex-col items-center p-4 bg-gray-50">
                     <FaSnowflake className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">Climatisation</span>
-                    <span className="text-xs text-gray-500">{car.hasAC ? 'Oui' : 'Non'}</span>
+                    <span className="text-sm">{t('carDetail.features.airConditioning')}</span>
+                    <span className="text-xs text-gray-500">{car.hasAC ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
                   </div>
                   <div className="flex flex-col items-center p-4 bg-gray-50">
                     <FaCamera className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">Caméra recul</span>
-                    <span className="text-xs text-gray-500">{car.hasRearCamera ? 'Oui' : 'Non'}</span>
+                    <span className="text-sm">{t('carDetail.features.backupCamera')}</span>
+                    <span className="text-xs text-gray-500">{car.hasRearCamera ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
                   </div>
                   <div className="flex flex-col items-center p-4 bg-gray-50">
                     <FaTablet className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">Écran tactile</span>
-                    <span className="text-xs text-gray-500">{car.hasTouchScreen ? 'Oui' : 'Non'}</span>
+                    <span className="text-sm">{t('carDetail.features.touchScreen')}</span>
+                    <span className="text-xs text-gray-500">{car.hasTouchScreen ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Colonne droite - Formulaire */}
+            {/* Right column - Booking form */}
             <div>
               <div className="bg-white shadow-lg overflow-hidden">
                 <div className="p-6">
@@ -300,9 +312,9 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* Section Voitures Similaires */}
+      {/* Similar Cars Section */}
       <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-6">Voitures Similaires</h2>
+        <h2 className="text-2xl font-bold mb-6">{t('carDetail.similarCars')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {similarCars
             .filter(similarCar => similarCar.id !== parseInt(id))
@@ -326,7 +338,7 @@ const CarDetail = () => {
                   {[...Array(5)].map((_, i) => (
                     <FaStar key={i} className="text-yellow-400 w-4 h-4" />
                   ))}
-                  <span className="ml-2 text-sm text-gray-600">2 Reviews</span>
+                  <span className="ml-2 text-sm text-gray-600">2 {t('carDetail.reviews')}</span>
                 </div>
                 
                 {/* Car Name */}
@@ -334,14 +346,14 @@ const CarDetail = () => {
                 
                 {/* Price */}
                 <div className="text-blue-600 font-bold text-lg mb-4">
-                  {similarCar.pricePerDay} FCFA<span className="text-sm font-normal text-gray-600"> / Jour</span>
+                  {similarCar.pricePerDay} FCFA<span className="text-sm font-normal text-gray-600">{t('carDetail.perDay')}</span>
                 </div>
                 
                 {/* Features */}
                 <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
                   <div className="flex items-center">
                     <FaUsers className="mr-2" />
-                    <span>{similarCar.seats} Places</span>
+                    <span>{similarCar.seats} {t('carDetail.features.seats')}</span>
                   </div>
                   <div className="flex items-center">
                     <FaCog className="mr-2" />
@@ -353,13 +365,13 @@ const CarDetail = () => {
                   </div>
                   <div className="flex items-center">
                     <FaCar className="mr-2" />
-                    <span>{similarCar.doors} Portes</span>
+                    <span>{similarCar.doors} {t('carDetail.doors')}</span>
                   </div>
                 </div>
                 
                 {/* Book Now Button */}
                 <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center">
-                  Réserver maintenant <MdArrowForward className="ml-2" />
+                  {t('carDetail.bookNow')} <MdArrowForward className="ml-2" />
                 </button>
               </div>
             </div>
@@ -367,7 +379,7 @@ const CarDetail = () => {
         </div>
       </div>
 
-      {/* Modal des conditions d'utilisation */}
+      {/* Terms of use modal */}
       <TermsModal 
         isOpen={showTerms} 
         onClose={handleTermsClose}

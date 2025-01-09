@@ -111,6 +111,95 @@
       }
     }
   },
+  "carDetail": {
+    "aboutVehicle": "Über dieses Fahrzeug",
+    "features": {
+      "airConditioning": "Klimaanlage",
+      "backupCamera": "Rückfahrkamera",
+      "touchScreen": "Touchscreen",
+      "seats": "Sitze",
+      "yes": "Ja",
+      "no": "Nein"
+    },
+    "similarCars": "Ähnliche Fahrzeuge",
+    "bookNow": "Jetzt buchen",
+    "perDay": "/ Tag",
+    "reviews": "Bewertungen",
+    "doors": "Türen",
+    "errors": {
+      "acceptTerms": "Bitte akzeptieren Sie die Nutzungsbedingungen",
+      "selectPayment": "Bitte wählen Sie eine Zahlungsmethode",
+      "selectOperator": "Bitte wählen Sie einen Mobilfunkanbieter",
+      "bookingError": "Bei der Buchung ist ein Fehler aufgetreten",
+      "loadingError": "Fehler beim Laden des Autos"
+    },
+    "success": {
+      "booking": "Buchung erfolgreich!"
+    },
+    "descriptions": {
+      "berline": "Eine elegante und komfortable Limousine, perfekt für Stadtfahrten und lange Reisen. Ausgestattet mit allen modernen Annehmlichkeiten für Ihren Komfort.",
+      "suv": "Ein geräumiger und vielseitiger SUV, ideal für Familien und Gruppen. Perfekt für Stadtstraßen und anspruchsvolleres Gelände.",
+      "pickup": "Ein robuster und zuverlässiger Pickup, geeignet für schwieriges Gelände und schwere Lasten. Perfekt für Profis und Abenteurer.",
+      "premium": "Ein hochwertiges Auto, das Luxus und Leistung vereint. Ausgestattet mit neuester Technologie für ein außergewöhnliches Fahrerlebnis."
+    }
+  },
+  "bookingForm": {
+    "personalInfo": "Persönliche Informationen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "firstNamePlaceholder": "Ihr Vorname",
+    "lastNamePlaceholder": "Ihr Nachname",
+    "emailPlaceholder": "ihre@email.com",
+    "phonePlaceholder": "+237 6XX XX XX XX",
+    "bookingDetails": "Buchungsdetails",
+    "departureCity": "Abfahrtsort",
+    "returnCity": "Rückgabeort",
+    "pickupLocation": "Wohnadresse in Douala",
+    "pickupLocationPlaceholder": "Ihre vollständige Adresse",
+    "pickupDate": "Startdatum",
+    "dropoffDate": "Enddatum",
+    "paymentMethod": "Zahlungsmethode",
+    "mobileMoney": "Mobile Money",
+    "bankTransfer": "Banküberweisung",
+    "acceptTerms": "Ich akzeptiere die",
+    "terms": "Nutzungsbedingungen",
+    "total": "Gesamtpreis",
+    "processing": "Verarbeitung...",
+    "confirmBooking": "Buchung bestätigen"
+  },
+  "bookingSummary": {
+    "title": "Buchungsübersicht",
+    "bookingDetails": "Buchungsdetails",
+    "car": "Fahrzeug",
+    "pickupDate": "Abholdatum",
+    "returnDate": "Rückgabedatum",
+    "pickupLocation": "Abholort",
+    "returnLocation": "Rückgabeort",
+    "duration": "Dauer",
+    "days": "Tage",
+    "customerInfo": "Kundeninformationen",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "paymentDetails": "Zahlungsdetails",
+    "dailyRate": "Tagestarif",
+    "totalDays": "Gesamttage",
+    "subtotal": "Zwischensumme",
+    "tax": "MwSt.",
+    "total": "Gesamtbetrag",
+    "paymentMethod": "Zahlungsmethode",
+    "mobileMoneyNumber": "Mobile Money Nummer",
+    "status": {
+      "pending": "Ausstehend",
+      "confirmed": "Bestätigt",
+      "cancelled": "Storniert"
+    },
+    "downloadPdf": "PDF herunterladen",
+    "printReceipt": "Beleg drucken",
+    "backToHome": "Zurück zur Startseite"
+  },
   "footer": {
     "description": "Ihr vertrauenswürdiger Partner für Reisen in Kamerun. Professioneller Fahrer-Service rund um die Uhr verfügbar.",
     "quickLinks": "Schnelllinks",
