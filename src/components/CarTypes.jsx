@@ -4,7 +4,9 @@ import {
   FaCarSide,
   FaCarAlt,
   FaGem,
-  FaTruck
+  FaTruck,
+  FaCircle,
+  FaTruckPickup
 } from 'react-icons/fa';
 import AOS from 'aos';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +20,7 @@ const CarTypes = () => {
     { 
       id: 1, 
       name: t('carTypes.berline.name'), 
-      icon: FaCarSide,
+      icon: FaCarAlt,
       description: t('carTypes.berline.description'),
       filterType: 'berline',
       gradient: 'from-blue-500 via-blue-600 to-indigo-700',
@@ -27,7 +29,7 @@ const CarTypes = () => {
     { 
       id: 2, 
       name: t('carTypes.suv.name'), 
-      icon: FaTruck,
+      icon: FaCarSide,
       description: t('carTypes.suv.description'),
       filterType: 'suv',
       gradient: 'from-purple-500 via-purple-600 to-purple-800',
@@ -36,7 +38,7 @@ const CarTypes = () => {
     { 
       id: 3, 
       name: t('carTypes.pickup.name'), 
-      icon: FaCarAlt,
+      icon: FaTruckPickup,
       description: t('carTypes.pickup.description'),
       filterType: 'pickup',
       gradient: 'from-red-500 via-red-600 to-red-800',
