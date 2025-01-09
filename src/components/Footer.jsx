@@ -1,103 +1,120 @@
 import { FaFacebookF, FaYoutube, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { FaPhoneVolume } from 'react-icons/fa6';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
+
   const handleWhatsAppClick = (phone) => {
     window.open(`https://wa.me/${phone}`, '_blank');
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#132676] to-[#0a1545] text-white">
-      <div className="container mx-auto px-4 py-16">
+    <footer className="bg-[#1c1c72] text-white pt-16">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo et Description */}
-          <div className="space-y-6">
-            <img 
+          <div>
+            <img
               src="/img/Logo-arnoe.png"
-              alt="Arnoe" 
+              alt="Arnoe"
               className="h-32 md:h-40 mb-4"
             />
             <p className="text-white/80">
-              Votre partenaire de confiance pour vos déplacements au Cameroun. 
-              Service de voiture avec chauffeur professionnel disponible 24/7.
+              {t('footer.description')}
             </p>
           </div>
 
           {/* Liens Rapides */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Liens Rapides</h3>
+            <h3 className="text-xl font-bold mb-6">{t('footer.quickLinks')}</h3>
             <ul className="space-y-4">
-              <li><a href="#about" className="hover:text-[#FF4D30] transition-colors">À Propos</a></li>
-              <li><a href="#services" className="hover:text-[#FF4D30] transition-colors">Services</a></li>
-              <li><a href="#fleet" className="hover:text-[#FF4D30] transition-colors">Notre Flotte</a></li>
-              <li><a href="#contact" className="hover:text-[#FF4D30] transition-colors">Contact</a></li>
+              <li><a href="#about" className="hover:text-[#FF4D30] transition-colors">{t('footer.about')}</a></li>
+              <li><a href="#services" className="hover:text-[#FF4D30] transition-colors">{t('footer.services')}</a></li>
+              <li><a href="#fleet" className="hover:text-[#FF4D30] transition-colors">{t('footer.fleet')}</a></li>
+              <li><a href="#contact" className="hover:text-[#FF4D30] transition-colors">{t('footer.contact')}</a></li>
             </ul>
           </div>
 
-          {/* Régions Desservies */}
+          {/* Régions */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Régions Desservies</h3>
+            <h3 className="text-xl font-bold mb-6">{t('footer.servedRegions')}</h3>
             <ul className="space-y-4">
-              <li>Littoral</li>
-              <li>Centre</li>
-              <li>Sud-Ouest</li>
-              <li>Nord-Ouest</li>
-              <li>SUD</li>
+              <li>{t('footer.regions.littoral')}</li>
+              <li>{t('footer.regions.centre')}</li>
+              <li>{t('footer.regions.ouest')}</li>
+              <li>{t('footer.regions.sud')}</li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-xl font-bold mb-6">Contact</h3>
+            <h3 className="text-xl font-bold mb-6">{t('footer.contactUs')}</h3>
             <ul className="space-y-4">
-              <li className="flex items-center gap-2">
-                <FaPhoneVolume className="text-[#FF4D30]" />
+              <li className="flex items-start gap-2">
+                <FaPhoneVolume className="text-[#FF4D30] mt-1" />
                 <div>
-                  <p>+237 699597698</p>
-                  <p>+237 699543001</p>
+                  <p className="hover:text-[#FF4D30] transition-colors">+237 699597698</p>
+                  <p className="hover:text-[#FF4D30] transition-colors">+237 699543001</p>
                 </div>
               </li>
-              <li className="flex items-center gap-2">
-                <FaWhatsapp className="text-[#FF4D30]" />
+              <li className="flex items-start gap-2">
+                <FaWhatsapp className="text-[#FF4D30] mt-1" />
                 <div>
-                  <p className="cursor-pointer hover:text-[#FF4D30]" onClick={() => handleWhatsAppClick('237699597698')}>+237 699597698</p>
-                  <p className="cursor-pointer hover:text-[#FF4D30]" onClick={() => handleWhatsAppClick('237699543001')}>+237 699543001</p>
+                  <p 
+                    className="cursor-pointer hover:text-[#FF4D30] transition-colors"
+                    onClick={() => handleWhatsAppClick('237699597698')}
+                  >
+                    +237 699597698
+                  </p>
+                  <p 
+                    className="cursor-pointer hover:text-[#FF4D30] transition-colors"
+                    onClick={() => handleWhatsAppClick('237699543001')}
+                  >
+                    +237 699543001
+                  </p>
                 </div>
               </li>
               <li className="flex items-center gap-2">
                 <HiMail className="text-[#FF4D30]" />
-                <span>jfeuku@arnoe.org</span>
+                <a
+                  href="mailto:jfeuku@arnoe.org"
+                  className="hover:text-[#FF4D30] transition-colors"
+                >
+                  jfeuku@arnoe.org
+                </a>
               </li>
             </ul>
 
-            {/* Social Media */}
+            {/* Réseaux Sociaux */}
             <div className="mt-6">
-              <h4 className="font-semibold mb-4">Suivez-nous</h4>
+              <h4 className="font-semibold mb-4">{t('footer.followUs')}</h4>
               <div className="flex space-x-4">
                 <a 
                   href="https://www.facebook.com/ArnoeTravel" 
                   target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-[#FF4D30] transition-transform hover:scale-110"
+                  rel="noopener noreferrer"
+                  className="bg-[#FF4D30] hover:bg-[#fa3815] p-2 rounded-full transition-colors"
                 >
-                  <FaFacebookF className="h-6 w-6" />
+                  <FaFacebookF />
                 </a>
                 <a 
                   href="https://www.youtube.com/@ARNOETRAVELAGENCY" 
                   target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-[#FF4D30] transition-transform hover:scale-110"
+                  rel="noopener noreferrer"
+                  className="bg-[#FF4D30] hover:bg-[#fa3815] p-2 rounded-full transition-colors"
                 >
-                  <FaYoutube className="h-6 w-6" />
+                  <FaYoutube />
                 </a>
                 <a 
                   href="https://www.tiktok.com/@ata.sarl" 
                   target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-[#FF4D30] transition-transform hover:scale-110"
+                  rel="noopener noreferrer"
+                  className="bg-[#FF4D30] hover:bg-[#fa3815] p-2 rounded-full transition-colors"
                 >
-                  <FaTiktok className="h-6 w-6" />
+                  <FaTiktok />
                 </a>
               </div>
             </div>
@@ -105,9 +122,9 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/20 mt-12 pt-8 text-center">
+        <div className="border-t border-white/20 mt-12 pt-8 pb-8 text-center">
           <p className="text-white/60">
-            {new Date().getFullYear()} Arnoe. Tous droits réservés.
+            {currentYear} Arnoe. {t('footer.rights')}
           </p>
         </div>
       </div>

@@ -1,61 +1,57 @@
-import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  FaCarSide, //chaud
+  FaCarSide,
   FaCarAlt,
   FaGem,
-  FaShuttleVan,
   FaTruck
 } from 'react-icons/fa';
 import AOS from 'aos';
+import { useTranslation } from 'react-i18next';
 
 const CarTypes = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   
   const carTypes = [
     { 
       id: 1, 
-      name: 'Berline', 
+      name: t('carTypes.berline.name'), 
       icon: FaCarSide,
-      description: 'Confort et élégance',
+      description: t('carTypes.berline.description'),
       filterType: 'berline',
       gradient: 'from-blue-500 via-blue-600 to-indigo-700',
       shadowColor: 'shadow-blue-500/30'
     },
     { 
       id: 2, 
-      name: 'SUV', 
+      name: t('carTypes.suv.name'), 
       icon: FaTruck,
-      description: 'Polyvalence et espace',
+      description: t('carTypes.suv.description'),
       filterType: 'suv',
       gradient: 'from-purple-500 via-purple-600 to-purple-800',
       shadowColor: 'shadow-purple-500/30'
     },
     { 
-      id: 4, 
-      name: 'Pickup', 
+      id: 3, 
+      name: t('carTypes.pickup.name'), 
       icon: FaCarAlt,
-      description: 'Robustesse et praticité',
+      description: t('carTypes.pickup.description'),
       filterType: 'pickup',
       gradient: 'from-red-500 via-red-600 to-red-800',
       shadowColor: 'shadow-red-500/30'
     },
     { 
-      id: 5, 
-      name: 'Premium', 
+      id: 4, 
+      name: t('carTypes.premium.name'), 
       icon: FaGem,
-      description: 'Luxe et prestige',
+      description: t('carTypes.premium.description'),
       filterType: 'premium',
       gradient: 'from-emerald-400 via-emerald-600 to-emerald-800',
       shadowColor: 'shadow-emerald-500/30'
     }
   ];
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   const handleCarTypeClick = (filterType) => {
     console.log('Type de voiture sélectionné:', filterType);
@@ -76,12 +72,11 @@ const CarTypes = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[#FF4D30] text-sm font-bold mb-4 tracking-wider uppercase">Découvrez notre flotte</p>
+            <p className="text-[#FF4D30] text-sm font-bold mb-4 tracking-wider uppercase">
+              {t('carTypes.title')}
+            </p>
             <h2 className="text-5xl font-bold text-[#132676] mb-6">
-              Une Flotte Adaptée à<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4D30] to-[#ff2c00]">
-                Tous vos Besoins
-              </span>
+              {t('carTypes.subtitle')}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-[#FF4D30] to-[#ff2c00] mx-auto rounded-full"></div>
           </motion.div>
@@ -124,7 +119,7 @@ const CarTypes = () => {
                       className="mt-4 px-4 py-2 border border-white/30 rounded-full text-white/90 text-sm backdrop-blur-sm
                                opacity-0 group-hover:opacity-100 transition-all duration-300"
                     >
-                      Découvrir
+                      {t('carTypes.discover')}
                     </motion.div>
                   </div>
                 </div>

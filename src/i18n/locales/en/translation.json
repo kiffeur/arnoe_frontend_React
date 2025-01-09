@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "cars": "Car Rental",
+    "accommodation": "Accommodation",
+    "flights": "Flights",
+    "comingSoon": "Coming Soon",
+    "close": "Close"
+  },
+  "hero": {
+    "title": "Travel with Peace of Mind with our Professional Drivers",
+    "description": "Discover Cameroon safely with our car rental service with driver. Experienced drivers, comfortable vehicles and 24/7 service for all your travels.",
+    "pickupCity": "Pickup City",
+    "dropoffCity": "Drop-off City",
+    "pickupDate": "Pickup Date",
+    "returnDate": "Return Date",
+    "carType": "Car Type",
+    "search": "Search"
+  },
+  "benefits": {
+    "title": "Why Choose Us",
+    "subtitle": "Discover the advantages that make us different",
+    "security": {
+      "title": "Guaranteed Security",
+      "description": "All our vehicles are regularly maintained and insured for your peace of mind."
+    },
+    "bestPrices": {
+      "title": "Best Prices",
+      "description": "We guarantee you the most competitive rates in the market, without compromising on quality."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Our team is available at any time to answer your questions and needs."
+    }
+  },
+  "carTypes": {
+    "title": "Discover our fleet",
+    "subtitle": "A Fleet Adapted to All Your Needs",
+    "berline": {
+      "name": "Sedan",
+      "description": "Comfort and elegance"
+    },
+    "suv": {
+      "name": "SUV",
+      "description": "Versatility and space"
+    },
+    "pickup": {
+      "name": "Pickup",
+      "description": "Robustness and practicality"
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Luxury and prestige"
+    }
+  },
+  "rentalCar": {
+    "loading": "Loading vehicles...",
+    "title": "Our Vehicle Fleet",
+    "subtitle": "Discover our selection of quality vehicles for all your travel needs in Cameroon",
+    "viewAll": "View all vehicles",
+    "reviews": "{{count}} Reviews",
+    "pricePerDay": "/ Day",
+    "bookNow": "Book Now",
+    "features": {
+      "seats": "Seats",
+      "automatic": "Automatic",
+      "manual": "Manual",
+      "mountain": "4x4",
+      "2x4": "2x4"
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Car rental in 4 simple steps",
+    "steps": {
+      "search": {
+        "title": "SEARCH",
+        "description": "Search for the car that meets your needs"
+      },
+      "select": {
+        "title": "SELECT",
+        "description": "Choose the car that suits you best"
+      },
+      "book": {
+        "title": "BOOK",
+        "description": "Book easily in a few clicks"
+      },
+      "drive": {
+        "title": "DRIVE",
+        "description": "Enjoy your trip with peace of mind"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What They Say About Us",
+    "subtitle": "Discover what our satisfied customers have to say",
+    "reviews": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "role": "Regular Customer",
+        "content": "I had an amazing experience with Remons. The service was exceptional and the car was in perfect condition. Will definitely use their services again!"
+      },
+      "michael": {
+        "name": "Michael Brown",
+        "role": "Business Traveler",
+        "content": "Professional service from start to finish. The car was clean, well-maintained and exactly what I needed for my business trip."
+      },
+      "emily": {
+        "name": "Emily Davis",
+        "role": "Tourist",
+        "content": "Excellent customer service! The team was very helpful in choosing the right car for our family vacation. Highly recommended!"
+      }
+    }
+  },
+  "footer": {
+    "description": "Your trusted partner for travel in Cameroon. Professional driver car service available 24/7.",
+    "quickLinks": "Quick Links",
+    "about": "About",
+    "services": "Services",
+    "fleet": "Our Fleet",
+    "contact": "Contact",
+    "servedRegions": "Served Regions",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved."
+  }
+}

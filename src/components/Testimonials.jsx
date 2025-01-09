@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const testimonials = [
   {
@@ -34,6 +35,20 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { t } = useTranslation();
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
+
+  const handleDotClick = (index) => {
+    setCurrentTestimonial(index);
+  };
+
   useEffect(() => {
     const createParticle = () => {
       const particle = document.createElement('div');
@@ -109,8 +124,8 @@ const Testimonials = () => {
               <ChatBubbleBottomCenterTextIcon className="w-8 h-8 text-[#FF4D30]" />
             </div>
           </div>
-          <h3 className="text-[#FF4D30] text-lg font-semibold mb-4">TESTIMONIALS</h3>
-          <h2 className="text-white text-4xl font-bold">What They're Talking<br />About Remons</h2>
+          <h3 className="text-[#FF4D30] text-lg font-semibold mb-4">{t('testimonials.title')}</h3>
+          <h2 className="text-white text-4xl font-bold">{t('testimonials.subtitle')}</h2>
         </div>
 
         {/* Testimonials Slider */}
@@ -132,7 +147,7 @@ const Testimonials = () => {
             modules={[Pagination, Autoplay, Mousewheel]}
             className="h-full"
           >
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <SwiperSlide key={testimonial.id}>
                 <div className="bg-white rounded-xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                   {/* Quote Icon */}

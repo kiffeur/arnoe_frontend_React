@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaGasPump, FaCar, FaUsers, FaStar, FaSnowflake, FaCamera, FaTablet, FaMountain } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaGasPump, FaCar, FaUsers, FaStar, FaMountain } from 'react-icons/fa';
 import { MdArrowForward } from 'react-icons/md';
 import { getAllCars } from '../services/api';
+import { useTranslation } from 'react-i18next';
 
 const RentalCar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,6 +35,7 @@ const RentalCar = () => {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-600"></div>
+            <p className="text-lg text-gray-600">{t('rentalCar.loading')}</p>
           </div>
         </div>
       </section>
@@ -58,10 +61,10 @@ const RentalCar = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-            Notre Flotte de Véhicules
+            {t('rentalCar.title')}
           </h2>
           <p className="text-gray-600 mb-12 text-lg max-w-2xl mx-auto">
-            Découvrez notre sélection de véhicules de qualité pour tous vos besoins de déplacement au Cameroun
+            {t('rentalCar.subtitle')}
           </p>
         </motion.div>
 
@@ -83,7 +86,7 @@ const RentalCar = () => {
               to="/search" 
               className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-400 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Voir tous les véhicules
+              {t('rentalCar.viewAll')}
               <MdArrowForward className="text-xl" />
             </Link>
           </motion.div>
@@ -94,6 +97,7 @@ const RentalCar = () => {
 };
 
 const RentalCarComponent = ({ car }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleNavigation = (e) => {
@@ -124,7 +128,9 @@ const RentalCarComponent = ({ car }) => {
           {[...Array(5)].map((_, i) => (
             <FaStar key={i} className="text-yellow-400 w-4 h-4" />
           ))}
-          <span className="ml-2 text-sm text-gray-600">2 Reviews</span>
+          <span className="ml-2 text-sm text-gray-600">
+            {t('rentalCar.reviews', { count: 2 })}
+          </span>
         </div>
 
         {/* Car Name */}
@@ -132,18 +138,23 @@ const RentalCarComponent = ({ car }) => {
 
         {/* Price */}
         <div className="text-blue-600 font-bold text-lg mb-4">
-          {car.pricePerDay} FCFA<span className="text-sm font-normal text-gray-600"> / Jour</span>
+          {car.pricePerDay} FCFA
+          <span className="text-sm font-normal text-gray-600">{t('rentalCar.pricePerDay')}</span>
         </div>
 
         {/* Features */}
         <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
           <div className="flex items-center">
             <FaUsers className="mr-2" />
-            <span>{car.seats} Places</span>
+            <span>{car.seats} {t('rentalCar.features.seats')}</span>
           </div>
           <div className="flex items-center">
             <FaCar className="mr-2" />
-            <span>{car.transmission}</span>
+            <span>
+              {car.transmission === 'automatic' 
+                ? t('rentalCar.features.automatic')
+                : t('rentalCar.features.manual')}
+            </span>
           </div>
           <div className="flex items-center">
             <FaGasPump className="mr-2" />
@@ -151,7 +162,11 @@ const RentalCarComponent = ({ car }) => {
           </div>
           <div className="flex items-center">
             <FaMountain className="mr-2" />
-            <span>{car.is4x4 ? '4x4' : '2x4'}</span>
+            <span>
+              {car.is4x4 
+                ? t('rentalCar.features.mountain')
+                : t('rentalCar.features.2x4')}
+            </span>
           </div>
         </div>
 
@@ -162,7 +177,7 @@ const RentalCarComponent = ({ car }) => {
           whileTap={{ scale: 0.98 }}
           className="w-full bg-white text-blue-600 py-3 rounded-lg border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center font-semibold"
         >
-          Réserver <MdArrowForward className="ml-2 text-xl" />
+          {t('rentalCar.bookNow')} <MdArrowForward className="ml-2 text-xl" />
         </motion.button>
       </div>
     </motion.div>

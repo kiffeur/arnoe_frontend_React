@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "cars": "Location de Voitures",
+    "accommodation": "Logement",
+    "flights": "Vols",
+    "comingSoon": "Bientôt disponible",
+    "close": "Fermer"
+  },
+  "hero": {
+    "title": "Voyagez en Toute Sérénité avec nos Chauffeurs Professionnels",
+    "description": "Découvrez le Cameroun en toute sécurité avec notre service de location voiture avec chauffeur. Des conducteurs expérimentés, des véhicules confortables et un service disponible 24/7 pour tous vos déplacements.",
+    "pickupCity": "Ville de départ",
+    "dropoffCity": "Ville d'arrivée",
+    "pickupDate": "Date de départ",
+    "returnDate": "Date de retour",
+    "carType": "Type de voiture",
+    "search": "Rechercher"
+  },
+  "benefits": {
+    "title": "Pourquoi nous choisir",
+    "subtitle": "Découvrez les avantages qui font notre différence",
+    "security": {
+      "title": "Sécurité Garantie",
+      "description": "Tous nos véhicules sont régulièrement entretenus et assurés pour votre tranquillité d'esprit."
+    },
+    "bestPrices": {
+      "title": "Meilleurs Prix",
+      "description": "Nous vous garantissons les tarifs les plus compétitifs du marché, sans compromis sur la qualité."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Notre équipe est disponible à tout moment pour répondre à vos questions et besoins."
+    }
+  },
+  "carTypes": {
+    "title": "Découvrez notre flotte",
+    "subtitle": "Une Flotte Adaptée à Tous vos Besoins",
+    "discover": "Découvrir",
+    "berline": {
+      "name": "Berline",
+      "description": "Confort et élégance"
+    },
+    "suv": {
+      "name": "SUV",
+      "description": "Polyvalence et espace"
+    },
+    "pickup": {
+      "name": "Pickup",
+      "description": "Robustesse et praticité"
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Luxe et prestige"
+    }
+  },
+  "rentalCar": {
+    "loading": "Chargement des véhicules...",
+    "title": "Notre Flotte de Véhicules",
+    "subtitle": "Découvrez notre sélection de véhicules de qualité pour tous vos besoins de déplacement au Cameroun",
+    "viewAll": "Voir tous les véhicules",
+    "reviews": "{{count}} Avis",
+    "pricePerDay": "/ Jour",
+    "bookNow": "Réserver",
+    "features": {
+      "seats": "Places",
+      "automatic": "Automatique",
+      "manual": "Manuelle",
+      "mountain": "4x4",
+      "2x4": "2x4"
+    }
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Location de voiture en 4 étapes simples",
+    "steps": {
+      "search": {
+        "title": "SEARCH",
+        "description": "Recherchez la voiture qui correspond à vos besoins"
+      },
+      "select": {
+        "title": "SELECT",
+        "description": "Choisissez la voiture qui vous convient le mieux"
+      },
+      "book": {
+        "title": "BOOK",
+        "description": "Réservez facilement en quelques clics"
+      },
+      "drive": {
+        "title": "DRIVE",
+        "description": "Profitez de votre voyage en toute tranquillité"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Ce qu'ils disent de nous",
+    "subtitle": "Découvrez les avis de nos clients satisfaits",
+    "reviews": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "role": "Client régulier",
+        "content": "J'ai eu une expérience incroyable avec Remons. Le service était exceptionnel et la voiture était en parfait état. Je réutiliserai certainement leurs services !"
+      },
+      "michael": {
+        "name": "Michael Brown",
+        "role": "Voyageur d'affaires",
+        "content": "Service professionnel du début à la fin. La voiture était propre, bien entretenue et exactement ce dont j'avais besoin pour mon voyage d'affaires."
+      },
+      "emily": {
+        "name": "Emily Davis",
+        "role": "Touriste",
+        "content": "Excellent service client ! L'équipe a été très utile pour choisir la bonne voiture pour nos vacances en famille. Je recommande vivement !"
+      }
+    }
+  },
+  "footer": {
+    "description": "Votre partenaire de confiance pour vos déplacements au Cameroun. Service de voiture avec chauffeur professionnel disponible 24/7.",
+    "quickLinks": "Liens Rapides",
+    "about": "À Propos",
+    "services": "Services",
+    "fleet": "Notre Flotte",
+    "contact": "Contact",
+    "contactUs": "Contact",
+    "servedRegions": "Régions Desservies",
+    "regions": {
+      "littoral": "Littoral",
+      "centre": "Centre",
+      "ouest": "Ouest",
+      "sud": "Sud"
+    },
+    "followUs": "Suivez-nous",
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "rights": "Tous droits réservés."
+  }
+}

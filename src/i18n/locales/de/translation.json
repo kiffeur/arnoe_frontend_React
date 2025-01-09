@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "cars": "Autovermietung",
+    "accommodation": "Unterkunft",
+    "flights": "Flüge",
+    "comingSoon": "Demnächst verfügbar",
+    "close": "Schließen"
+  },
+  "hero": {
+    "title": "Reisen Sie sorgenfrei mit unseren professionellen Fahrern",
+    "description": "Entdecken Sie Kamerun sicher mit unserem Mietwagen-Service mit Fahrer. Erfahrene Fahrer, komfortable Fahrzeuge und 24/7-Service für alle Ihre Reisen.",
+    "pickupCity": "Abholstadt",
+    "dropoffCity": "Rückgabestadt",
+    "pickupDate": "Abholdatum",
+    "returnDate": "Rückgabedatum",
+    "carType": "Fahrzeugtyp",
+    "search": "Suchen"
+  },
+  "benefits": {
+    "title": "Warum uns wählen",
+    "subtitle": "Entdecken Sie die Vorteile, die uns anders machen",
+    "security": {
+      "title": "Garantierte Sicherheit",
+      "description": "Alle unsere Fahrzeuge werden regelmäßig gewartet und versichert für Ihre Sicherheit."
+    },
+    "bestPrices": {
+      "title": "Beste Preise",
+      "description": "Wir garantieren Ihnen die wettbewerbsfähigsten Preise auf dem Markt, ohne Kompromisse bei der Qualität."
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Unser Team steht Ihnen jederzeit zur Verfügung, um Ihre Fragen zu beantworten."
+    }
+  },
+  "carTypes": {
+    "title": "Entdecken Sie unsere Flotte",
+    "subtitle": "Eine Flotte für alle Ihre Bedürfnisse",
+    "berline": {
+      "name": "Limousine",
+      "description": "Komfort und Eleganz"
+    },
+    "suv": {
+      "name": "SUV",
+      "description": "Vielseitigkeit und Raum"
+    },
+    "pickup": {
+      "name": "Pickup",
+      "description": "Robustheit und Praktikabilität"
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Luxus und Prestige"
+    }
+  },
+  "rentalCar": {
+    "loading": "Fahrzeuge werden geladen...",
+    "title": "Unsere Fahrzeugflotte",
+    "subtitle": "Entdecken Sie unsere Auswahl an Qualitätsfahrzeugen für alle Ihre Reisebedürfnisse in Kamerun",
+    "viewAll": "Alle Fahrzeuge anzeigen",
+    "reviews": "{{count}} Bewertungen",
+    "pricePerDay": "/ Tag",
+    "bookNow": "Jetzt buchen",
+    "features": {
+      "seats": "Sitze",
+      "automatic": "Automatik",
+      "manual": "Manuell",
+      "mountain": "4x4",
+      "2x4": "2x4"
+    }
+  },
+  "howItWorks": {
+    "title": "Wie es funktioniert",
+    "subtitle": "Autovermietung in 4 einfachen Schritten",
+    "steps": {
+      "search": {
+        "title": "SUCHEN",
+        "description": "Suchen Sie das Auto, das Ihren Bedürfnissen entspricht"
+      },
+      "select": {
+        "title": "AUSWÄHLEN",
+        "description": "Wählen Sie das Auto, das am besten zu Ihnen passt"
+      },
+      "book": {
+        "title": "BUCHEN",
+        "description": "Buchen Sie einfach mit wenigen Klicks"
+      },
+      "drive": {
+        "title": "FAHREN",
+        "description": "Genießen Sie Ihre Reise mit Seelenruhe"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Was sie über uns sagen",
+    "subtitle": "Entdecken Sie, was unsere zufriedenen Kunden zu sagen haben",
+    "reviews": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "role": "Stammkunde",
+        "content": "Ich hatte eine tolle Erfahrung mit Remons. Der Service war außergewöhnlich und das Auto war in perfektem Zustand. Werde ihre Dienste definitiv wieder nutzen!"
+      },
+      "michael": {
+        "name": "Michael Brown",
+        "role": "Geschäftsreisender",
+        "content": "Professioneller Service von Anfang bis Ende. Das Auto war sauber, gut gewartet und genau das, was ich für meine Geschäftsreise brauchte."
+      },
+      "emily": {
+        "name": "Emily Davis",
+        "role": "Tourist",
+        "content": "Ausgezeichneter Kundenservice! Das Team war sehr hilfreich bei der Auswahl des richtigen Autos für unseren Familienurlaub. Sehr empfehlenswert!"
+      }
+    }
+  },
+  "footer": {
+    "description": "Ihr vertrauenswürdiger Partner für Reisen in Kamerun. Professioneller Fahrer-Service rund um die Uhr verfügbar.",
+    "quickLinks": "Schnelllinks",
+    "about": "Über uns",
+    "services": "Dienstleistungen",
+    "fleet": "Unsere Flotte",
+    "contact": "Kontakt",
+    "servedRegions": "Bediente Regionen",
+    "followUs": "Folgen Sie uns",
+    "rights": "Alle Rechte vorbehalten."
+  }
+}

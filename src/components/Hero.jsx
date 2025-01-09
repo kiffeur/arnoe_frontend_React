@@ -13,6 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { fr } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 
 const locations = [
   "Douala",
@@ -41,6 +42,7 @@ const carTypes = [
 ];
 
 const Hero = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropoffLocation, setDropoffLocation] = useState('');
@@ -77,7 +79,7 @@ const Hero = () => {
                 data-aos-duration="1000" 
                 data-aos-delay="100"
               >
-                Voyagez en Toute Sérénité avec nos Chauffeurs Professionnels
+                {t('hero.title')}
               </h1>
               <p 
                 className="text-[#596198] text-lg mb-8 max-w-2xl"
@@ -85,9 +87,7 @@ const Hero = () => {
                 data-aos-duration="1000" 
                 data-aos-delay="200"
               >
-                Découvrez le Cameroun en toute sécurité avec notre service de location voiture avec chauffeur. 
-                Des conducteurs expérimentés, des véhicules confortables et un service disponible 24/7 
-                pour tous vos déplacements.
+                {t('hero.description')}
               </p>
             </div>
             <form className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto" onSubmit={handleSearch}>
@@ -100,7 +100,7 @@ const Hero = () => {
                     onChange={(e) => setPickupLocation(e.target.value)}
                     className="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:border-[#303a9c]"
                   >
-                    <option value="">Ville de départ</option>
+                    <option value="">{t('hero.pickupCity')}</option>
                     {locations.map((loc, index) => (
                       <option key={index} value={loc}>{loc}</option>
                     ))}
@@ -115,7 +115,7 @@ const Hero = () => {
                     onChange={(e) => setDropoffLocation(e.target.value)}
                     className="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:border-[#303a9c]"
                   >
-                    <option value="">Ville d'arrivée</option>
+                    <option value="">{t('hero.dropoffCity')}</option>
                     {locations.map((loc, index) => (
                       <option key={index} value={loc}>{loc}</option>
                     ))}
@@ -129,7 +129,7 @@ const Hero = () => {
                     selected={pickupDate}
                     onChange={(date) => setPickupDate(date)}
                     className="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:border-[#303a9c]"
-                    placeholderText="Date de départ"
+                    placeholderText={t('hero.pickupDate')}
                     locale={fr}
                     dateFormat="dd/MM/yyyy"
                     minDate={new Date()}
@@ -143,7 +143,7 @@ const Hero = () => {
                     selected={dropoffDate}
                     onChange={(date) => setDropoffDate(date)}
                     className="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:border-[#303a9c]"
-                    placeholderText="Date de retour"
+                    placeholderText={t('hero.returnDate')}
                     locale={fr}
                     dateFormat="dd/MM/yyyy"
                     minDate={pickupDate || new Date()}
@@ -173,7 +173,7 @@ const Hero = () => {
                   }}
                   className="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:border-[#303a9c]"
                 >
-                  <option value="">Type de voiture</option>
+                  <option value="">{t('hero.carType')}</option>
                   {carTypes.map((type, index) => (
                     <option key={index} value={type}>{type}</option>
                   ))}
@@ -182,8 +182,9 @@ const Hero = () => {
 
               {/* Bouton de recherche */}
               <div className="mt-4">
-                <button type="submit" className="w-full bg-[#303a9c] hover:bg-[#232b6c] text-white py-3 rounded-lg transition-colors">
-                  Rechercher
+                <button type="submit" className="w-full bg-[#303a9c] hover:bg-[#232b6c] text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                  <MagnifyingGlassIcon className="w-5 h-5" />
+                  <span>{t('hero.search')}</span>
                 </button>
               </div>
             </form>
