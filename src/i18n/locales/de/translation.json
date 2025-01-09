@@ -176,6 +176,7 @@
     "pickupDate": "Abholdatum",
     "returnDate": "Rückgabedatum",
     "pickupLocation": "Abholort",
+    "departureLocation": "Abfahrtsort",
     "returnLocation": "Rückgabeort",
     "duration": "Dauer",
     "days": "Tage",

@@ -197,7 +197,7 @@
     "car": "Voiture",
     "pickupDate": "Date de Prise en Charge",
     "returnDate": "Date de Retour",
-    "pickupLocation": "Lieu de Prise en Charge",
+    "departureLocation": "Lieu de départ",
     "returnLocation": "Lieu de Retour",
     "duration": "Durée",
     "days": "jours",

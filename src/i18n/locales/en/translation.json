@@ -187,6 +187,7 @@
     "pickupDate": "Pickup Date",
     "returnDate": "Return Date",
     "pickupLocation": "Pickup Location",
+    "departureLocation": "Departure Location",
     "returnLocation": "Return Location",
     "duration": "Duration",
     "days": "days",
