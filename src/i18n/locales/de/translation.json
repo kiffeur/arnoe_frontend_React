@@ -220,6 +220,55 @@
       "button": "Verstanden!"
     }
   },
+  "searchResults": {
+    "loading": "Laden...",
+    "error": "Beim Laden der Autos ist ein Fehler aufgetreten",
+    "filters": {
+      "title": "Filter",
+      "carType": {
+        "label": "Fahrzeugtyp",
+        "all": "Alle Typen",
+        "options": {
+          "berline": "Limousine",
+          "suv5": "SUV 5 Sitzplätze",
+          "suv7": "SUV 7 Sitzplätze", 
+          "pickup": "Pickup",
+          "premium": "Premium"
+        }
+      },
+      "seats": {
+        "label": "Anzahl der Sitzplätze",
+        "all": "Alle",
+        "options": {
+          "2": "2 Sitzplätze",
+          "4": "4 Sitzplätze", 
+          "5": "5 Sitzplätze",
+          "7": "7 Sitzplätze"
+        }
+      },
+      "options": {
+        "label": "Optionen",
+        "ac": "Klimaanlage",
+        "rearCamera": "Rückfahrkamera",
+        "touchScreen": "Touchscreen",
+        "fourByFour": "4x4"
+      },
+      "mobile": {
+        "show": "Filter anzeigen",
+        "hide": "Filter ausblenden"
+      }
+    },
+    "noResults": "Keine Autos entsprechen Ihren Kriterien",
+    "carCard": {
+      "pricePerDay": "/ Tag",
+      "seats": "Sitzplätze",
+      "driveType": {
+        "fourByFour": "4x4",
+        "twoByFour": "2x4"
+      },
+      "bookButton": "Buchen"
+    }
+  },
   "footer": {
     "description": "Ihr vertrauenswürdiger Partner für Reisen in Kamerun. Professioneller Fahrer-Service rund um die Uhr verfügbar.",
     "quickLinks": "Schnelle Links",

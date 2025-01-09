@@ -235,5 +235,54 @@
       "description": "We're working hard to improve this service. Please check back later!",
       "button": "Got it!"
     }
+  },
+  "searchResults": {
+    "loading": "Loading...",
+    "error": "An error occurred while loading cars",
+    "filters": {
+      "title": "Filters",
+      "carType": {
+        "label": "Car Type",
+        "all": "All Types",
+        "options": {
+          "berline": "Sedan",
+          "suv5": "SUV 5 seats",
+          "suv7": "SUV 7 seats", 
+          "pickup": "Pickup",
+          "premium": "Premium"
+        }
+      },
+      "seats": {
+        "label": "Number of Seats",
+        "all": "All",
+        "options": {
+          "2": "2 seats",
+          "4": "4 seats", 
+          "5": "5 seats",
+          "7": "7 seats"
+        }
+      },
+      "options": {
+        "label": "Options",
+        "ac": "Air Conditioning",
+        "rearCamera": "Rear Camera",
+        "touchScreen": "Touch Screen",
+        "fourByFour": "4x4"
+      },
+      "mobile": {
+        "show": "Show Filters",
+        "hide": "Hide Filters"
+      }
+    },
+    "noResults": "No cars match your criteria",
+    "carCard": {
+      "pricePerDay": "/ Day",
+      "seats": "Seats",
+      "driveType": {
+        "fourByFour": "4x4",
+        "twoByFour": "2x4"
+      },
+      "bookButton": "Book"
+    }
   }
 }

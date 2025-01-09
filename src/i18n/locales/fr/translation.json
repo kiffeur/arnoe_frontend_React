@@ -245,5 +245,54 @@
       "description": "Nous travaillons dur pour améliorer ce service. Revenez plus tard !",
       "button": "Compris !"
     }
+  },
+  "searchResults": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue lors du chargement des voitures",
+    "filters": {
+      "title": "Filtres",
+      "carType": {
+        "label": "Type de voiture",
+        "all": "Tous les types",
+        "options": {
+          "berline": "Berline",
+          "suv5": "SUV 5 places",
+          "suv7": "SUV 7 places", 
+          "pickup": "Pickup",
+          "premium": "Premium"
+        }
+      },
+      "seats": {
+        "label": "Nombre de sièges",
+        "all": "Tous",
+        "options": {
+          "2": "2 places",
+          "4": "4 places", 
+          "5": "5 places",
+          "7": "7 places"
+        }
+      },
+      "options": {
+        "label": "Options",
+        "ac": "Climatisation",
+        "rearCamera": "Caméra de recul",
+        "touchScreen": "Écran tactile",
+        "fourByFour": "4x4"
+      },
+      "mobile": {
+        "show": "Afficher les filtres",
+        "hide": "Masquer les filtres"
+      }
+    },
+    "noResults": "Aucune voiture ne correspond à vos critères",
+    "carCard": {
+      "pricePerDay": "/ Jour",
+      "seats": "Places",
+      "driveType": {
+        "fourByFour": "4x4",
+        "twoByFour": "2x4"
+      },
+      "bookButton": "Réserver"
+    }
   }
 }
