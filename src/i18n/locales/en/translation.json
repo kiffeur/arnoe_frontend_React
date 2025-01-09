@@ -276,7 +276,8 @@
       "mobile": {
         "show": "Show Filters",
         "hide": "Hide Filters"
-      }
+      },
+      "apply": "Apply"
     },
     "noResults": "No cars match your criteria",
     "carCard": {
@@ -288,57 +289,5 @@
       },
       "bookButton": "Book"
     }
-  },
-  "termsModal": {
-    "title": "Terms of Use",
-    "introduction": "This text establishes the rules for a harmonious collaboration between ARNOE TRAVEL AGENCY, abbreviated as ATA, and its Clients. These conditions will be read and approved before proceeding with payment.",
-    "rental": {
-      "title": "About the Rental:",
-      "points": [
-        "The client will be responsible for fuel. Specifically, they must fill up the tank for their travels and return the vehicle at the end of the rental with the same initial fuel level.",
-        "The client will pay tolls and other related expenses related to the trip or rental on their itinerary.",
-        "ATA will share the driver's number in charge of the rental 24 hours before the start of the contract by email or other means defined by the client during booking.",
-        "ATA will provide the client with a vehicle in perfect working condition and ensuring impeccable interior and exterior cleanliness.",
-        "ATA will ensure the availability of the vehicle on the date and time agreed with the client.",
-        "The Client will pay 10,000 CFA francs to the driver against receipt to ensure a complete car cleaning service upon return."
-      ]
-    },
-    "contractExtension": {
-      "title": "Contract Extension",
-      "points": [
-        "Any contract extension must be made 48 hours before the expiration of the first rental. Given online reservations, the car could be reserved by another client for the day after the end of your rental contract. This time will allow us to manage the reconnection of this other reservation to another available fleet vehicle.",
-        "In case of non-compliance with this clause, the driver will be recalled to the Douala base and will be obliged to leave the client on site on the day of the contract's term."
-      ]
-    },
-    "cancellationConditions": {
-      "title": "Cancellation or Rescheduling Conditions",
-      "points": [
-        "Unpaid payment balances 48 hours before the contract's effective date will result in contract cancellation with a partial refund of 50% of the amount already paid. As you have noticed, any reservation period makes the car unavailable for any other reservation during the same period.",
-        "Any cancellation one week before the predefined date will result in a 75% refund of the initially paid amount.",
-        "Any cancellation 2 days before the contract start date will result in a 50% refund of the payment already made.",
-        "Any cancellation on the day will result in a 20% refund of the amount already paid.",
-        "For credit card payment refunds, the ATA customer service will contact you for transfer details."
-      ]
-    },
-    "duringRental": {
-      "title": "During Vehicle Rental",
-      "points": [
-        "An ATA customer advisor will call you to inquire about the service quality. An opportunity will thus be given to clients to express themselves so that we can improve the service while they are still benefiting from it.",
-        "The Client will be responsible for the driver's accommodation (lodging if they are outside the city of Douala). It should be noted here that the quality of the drivers' night has a direct relationship with the quality of their concentration during travel.",
-        "Under no circumstances should the client hold the key or even drive one of our cars.",
-        "The client must ensure that the vehicle sleeps in a secure location during the rental (for rentals outside the city of Douala).",
-        "Our cars are equipped with trackers. Nothing to do with curiosity, it's just for your safety.",
-        "ATA will call the drivers at random intervals to ensure the trip is going well. These will be routine calls of a fairly short duration.",
-        "In case of technical issues during your travels, ATA will ensure a vehicle replacement in a fairly short time."
-      ]
-    },
-    "endOfRental": {
-      "title": "At the End of the Rental",
-      "points": [
-        "The car must be at our base by 8 PM.",
-        "Please leave your suggestions, recommendations, and reviews."
-      ]
-    },
-    "acceptButton": "I have read and accept the conditions"
   }
 }

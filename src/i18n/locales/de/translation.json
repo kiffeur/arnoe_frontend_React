@@ -260,7 +260,8 @@
       "mobile": {
         "show": "Filter anzeigen",
         "hide": "Filter ausblenden"
-      }
+      },
+      "apply": "Anwenden"
     },
     "noResults": "Keine Autos entsprechen Ihren Kriterien",
     "carCard": {
@@ -288,57 +289,5 @@
     "servedRegions": "Bediente Regionen",
     "followUs": "Folgen Sie uns",
     "rights": "Alle Rechte vorbehalten."
-  },
-  "termsModal": {
-    "title": "Nutzungsbedingungen",
-    "introduction": "Dieser Text legt die Regeln für eine harmonische Zusammenarbeit zwischen ARNOE TRAVEL AGENCY, abgekürzt als ATA, und seinen Kunden fest. Diese Bedingungen werden gelesen und genehmigt, bevor die Zahlung erfolgt.",
-    "rental": {
-      "title": "Zur Miete:",
-      "points": [
-        "Der Kunde ist für den Kraftstoff verantwortlich. Genauer gesagt, er muss den Tank für seine Reisen auffüllen und das Fahrzeug am Ende der Miete mit dem gleichen ursprünglichen Kraftstoffstand zurückgeben.",
-        "Der Kunde wird Mautgebühren und andere damit verbundene Ausgaben für die Reise oder Miete auf seiner Strecke bezahlen.",
-        "ATA wird die Nummer des Fahrers, der für die Miete verantwortlich ist, 24 Stunden vor Vertragsbeginn per E-Mail oder anderen vom Kunden bei der Buchung festgelegten Mitteln mitteilen.",
-        "ATA wird dem Kunden ein Fahrzeug in perfektem Zustand zur Verfügung stellen, das eine tadellose Innen- und Außenreinheit gewährleistet.",
-        "ATA wird die Verfügbarkeit des Fahrzeugs am vereinbarten Datum und zur vereinbarten Uhrzeit sicherstellen.",
-        "Der Kunde wird dem Fahrer 10.000 CFA-Francs gegen Quittung zahlen, um einen vollständigen Fahrzeugreinigungsservice bei der Rückgabe zu gewährleisten."
-      ]
-    },
-    "contractExtension": {
-      "title": "Vertragsverlängerung",
-      "points": [
-        "Jede Vertragsverlängerung muss 48 Stunden vor Ablauf der ersten Miete erfolgen. Bei Online-Buchungen könnte das Fahrzeug von einem anderen Kunden für den Tag nach Ende Ihres Mietvertrags reserviert werden. Diese Zeit ermöglicht es uns, die Verbindung dieser anderen Reservierung zu einem anderen verfügbaren Flottenfahrzeug zu organisieren.",
-        "Bei Nichteinhaltung dieser Klausel wird der Fahrer zur Basis in Douala zurückgerufen und ist verpflichtet, den Kunden am Tag des Vertragsendes vor Ort zu lassen."
-      ]
-    },
-    "cancellationConditions": {
-      "title": "Stornierungs- oder Umbuchungsbedingungen",
-      "points": [
-        "Unbezahlte Zahlungssalden 48 Stunden vor dem Stichtag des Vertrags führen zur Vertragskündigung mit einer Teilrückerstattung von 50% des bereits gezahlten Betrags. Wie Sie bemerkt haben, macht jeder Buchungszeitraum das Fahrzeug für andere Buchungen in diesem Zeitraum nicht verfügbar.",
-        "Jede Stornierung eine Woche vor dem vordefinierten Datum führt zu einer Rückerstattung von 75% des ursprünglich gezahlten Betrags.",
-        "Jede Stornierung 2 Tage vor dem Vertragsbeginn führt zu einer Rückerstattung von 50% der bereits geleisteten Zahlung.",
-        "Jede Stornierung am Tag selbst führt zu einer Rückerstattung von 20% des bereits gezahlten Betrags.",
-        "Bei Rückerstattungen für Kreditkartenzahlungen wird der ATA-Kundenservice Sie für Transferdetails kontaktieren."
-      ]
-    },
-    "duringRental": {
-      "title": "Während der Fahrzeugmiete",
-      "points": [
-        "Ein ATA-Kundenberater wird Sie anrufen, um sich nach der Servicequalität zu erkundigen. Den Kunden wird so die Möglichkeit gegeben, sich zu äußern, damit wir den Service verbessern können, während sie ihn noch nutzen.",
-        "Der Kunde ist für die Unterbringung des Fahrers verantwortlich (Unterkunft, wenn sie außerhalb der Stadt Douala sind). Hier sollte beachtet werden, dass die Qualität der Nacht der Fahrer direkt mit der Qualität ihrer Konzentration während der Reise zusammenhängt.",
-        "Unter keinen Umständen sollte der Kunde den Schlüssel halten oder sogar eines unserer Autos fahren.",
-        "Der Kunde muss sicherstellen, dass das Fahrzeug während der Miete an einem sicheren Ort schläft (für Vermietungen außerhalb der Stadt Douala).",
-        "Unsere Autos sind mit Trackern ausgestattet. Das hat nichts mit Neugier zu tun, es geht nur um Ihre Sicherheit.",
-        "ATA wird die Fahrer in zufälligen Abständen anrufen, um sicherzustellen, dass die Reise gut verläuft. Dies werden Routineanrufe von ziemlich kurzer Dauer sein.",
-        "Bei technischen Problemen während Ihrer Reise wird ATA einen Fahrzeugaustausch in relativ kurzer Zeit sicherstellen."
-      ]
-    },
-    "endOfRental": {
-      "title": "Am Ende der Miete",
-      "points": [
-        "Das Auto muss bis 20 Uhr an unserer Basis sein.",
-        "Bitte hinterlassen Sie Ihre Vorschläge, Empfehlungen und Bewertungen."
-      ]
-    },
-    "acceptButton": "Ich habe die Bedingungen gelesen und akzeptiere sie"
   }
 }
