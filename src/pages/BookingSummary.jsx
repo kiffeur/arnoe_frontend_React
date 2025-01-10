@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCar, FaCheck } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import LogoImage from '/img/Logo-arnoe.png';  // Assurez-vous d'avoir un logo
 
 const BookingSummary = () => {
   const { t, i18n } = useTranslation();
@@ -39,10 +42,141 @@ const BookingSummary = () => {
   const days = calculateDays();
   const totalPrice = pricePerDay * days;
 
-  // Log pour le débogage
-  console.log('Price Per Day:', pricePerDay);
-  console.log('Number of Days:', days);
-  console.log('Total Price:', totalPrice);
+  useEffect(() => {
+    console.log('FULL BookingSummary Component State:');
+    console.log('Location State:', location.state);
+    console.log('Booking Data:', JSON.stringify(bookingData, null, 2));
+    console.log('Car Data:', JSON.stringify(bookingData?.car, null, 2));
+    console.log('Price Per Day:', pricePerDay);
+    console.log('Total Price:', totalPrice);
+    console.log('Days:', days);
+  }, [bookingData]);
+
+  // Fonction de formatage des prix
+  const formatPrice = (price) => {
+    // Convertir en nombre et formater avec séparateur de milliers
+    const numPrice = Number(price);
+    return isNaN(numPrice) ? 'N/A' : numPrice.toLocaleString('fr-FR', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+  };
+
+  const generatePDF = () => {
+    console.log('Generate PDF Called');
+    console.log('Booking Data Full Object:', bookingData);
+    
+    // Vérification détaillée des données
+    if (!bookingData) {
+      console.error('ERREUR: bookingData est undefined');
+      alert('Aucune donnée de réservation trouvée. Veuillez réessayer.');
+      return;
+    }
+
+    // Conversion explicite en chaînes
+    const safeValue = (value) => {
+      if (value === null || value === undefined) return 'N/A';
+      return String(value);
+    };
+
+    // Calculs financiers précis
+    const pricePerDayNumeric = Number(bookingData.pricePerDay);
+    const totalPriceNumeric = Number(bookingData.totalPrice);
+    const days = calculateDays();
+
+    // Création du PDF
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    // Couleurs
+    const COLORS = {
+      PRIMARY: [0, 51, 102],      // Bleu foncé professionnel
+      SECONDARY: [100, 100, 100], // Gris
+      TEXT: [0, 0, 0]             // Noir
+    };
+
+    // Configuration de base
+    pdf.setFont('helvetica', 'normal');
+
+    // Fond dégradé
+    pdf.setFillColor(240, 240, 255);
+    pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+    // Ajout du logo
+    pdf.addImage(LogoImage, 'PNG', pageWidth/2 - 20, 10, 40, 20);
+
+    // Titre élégant
+    pdf.setFontSize(20);
+    pdf.setTextColor(...COLORS.PRIMARY);
+    pdf.text('FACTURE DE LOCATION', pageWidth/2, 45, { align: 'center' });
+
+    // Informations de l'entreprise
+    pdf.setFontSize(10);
+    pdf.setTextColor(...COLORS.SECONDARY);
+    pdf.text('ARNOE LOCATION', 20, 65);
+    pdf.text('Contact: +237 699597698', 20, 70);
+    pdf.text('Email: jfeuku@arnoe.org', 20, 75);
+    pdf.text('Siège: Douala, Cameroun', 20, 80);
+
+    // Ligne de séparation
+    pdf.setDrawColor(200);
+    pdf.line(20, 85, pageWidth - 20, 85);
+
+    // Section Client
+    pdf.setFontSize(14);
+    pdf.setTextColor(...COLORS.PRIMARY);
+    pdf.text('Informations Client', 20, 100);
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(...COLORS.TEXT);
+    pdf.text(`Nom: ${safeValue(bookingData.firstName)} ${safeValue(bookingData.lastName)}`, 20, 110);
+    pdf.text(`Téléphone: ${safeValue(bookingData.phone)}`, 20, 117);
+    pdf.text(`Email: ${safeValue(bookingData.email)}`, 20, 124);
+
+    // Section Réservation
+    pdf.setFontSize(14);
+    pdf.setTextColor(...COLORS.PRIMARY);
+    pdf.text('Détails de la Réservation', 20, 140);
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(...COLORS.TEXT);
+    pdf.text(`Référence: ${safeValue(bookingData.bookingReference)}`, 20, 150);
+    pdf.text(`Véhicule: ${safeValue(bookingData.carName)}`, 20, 157);
+    pdf.text(`Date de Début: ${formatDate(bookingData.pickupDate)}`, 20, 164);
+    pdf.text(`Date de Fin: ${formatDate(bookingData.dropoffDate)}`, 20, 171);
+    pdf.text(`Durée: ${days} jours`, 20, 178);
+    pdf.text(`Lieu: ${safeValue(bookingData.pickupQuarter)}, ${safeValue(bookingData.pickupCity)}`, 20, 185);
+
+    // Section Financière avec mise en valeur
+    pdf.setFontSize(14);
+    pdf.setTextColor(...COLORS.PRIMARY);
+    pdf.text('Détails Financiers', 20, 200);
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(...COLORS.TEXT);
+    pdf.text(`Prix par Jour: ${formatPrice(pricePerDayNumeric)} FCFA`, 20, 210);
+    pdf.text(`Nombre de Jours: ${days}`, 20, 217);
+    
+    // Mise en valeur du prix total
+    pdf.setFontSize(16);
+    pdf.setTextColor(...COLORS.PRIMARY);
+    pdf.text(`TOTAL: ${formatPrice(totalPriceNumeric)} FCFA`, 20, 230, { maxWidth: pageWidth - 40 });
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(...COLORS.TEXT);
+    pdf.text(`Méthode de Paiement: ${safeValue(bookingData.paymentMethod)}`, 20, 240);
+    pdf.text(`Détails: ${safeValue(bookingData.paymentDetails)}`, 20, 247);
+
+    // Pied de page
+    pdf.setFontSize(10);
+    pdf.setTextColor(...COLORS.SECONDARY);
+    pdf.text('Merci pour votre confiance', pageWidth/2, pageHeight - 30, { align: 'center' });
+    pdf.text('Conditions de location disponibles sur www.cars.arnoe.org', pageWidth/2, pageHeight - 25, { align: 'center' });
+
+    // Sauvegarde
+    pdf.save(`Facture_Reservation_${safeValue(bookingData.bookingReference)}.pdf`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -69,7 +203,7 @@ const BookingSummary = () => {
             </p>
           </div>
 
-          <div className="bg-white shadow-lg rounded-lg p-8">
+          <div id="booking-summary-content" className="bg-white shadow-lg rounded-lg p-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Booking Details */}
               <div>
@@ -141,7 +275,7 @@ const BookingSummary = () => {
                 <div>
                   <div className="flex justify-between mb-2">
                     <span>{t('bookingSummary.dailyRate')}:</span>
-                    <span>{bookingData.pricePerDay} FCFA</span>
+                    <span>{formatPrice(bookingData.pricePerDay)} FCFA</span>
                   </div>
                   <div className="flex justify-between mb-2">
                     <span>{t('bookingSummary.totalDays')}:</span>
@@ -151,7 +285,7 @@ const BookingSummary = () => {
                 <div className="bg-gray-100 p-4 rounded-lg">
                   <div className="flex justify-between font-bold text-xl">
                     <span>{t('bookingSummary.total')}:</span>
-                    <span>{totalPrice} FCFA</span>
+                    <span>{formatPrice(totalPrice)} FCFA</span>
                   </div>
                   <div className="mt-4">
                     <span className="font-medium">{t('bookingSummary.paymentMethod')}:</span>
@@ -169,7 +303,10 @@ const BookingSummary = () => {
 
             {/* Action Buttons */}
             <div className="mt-8 flex justify-center space-x-4">
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
+              <button 
+                onClick={generatePDF} 
+                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
+              >
                 {t('bookingSummary.downloadPdf')}
               </button>
               <button 
