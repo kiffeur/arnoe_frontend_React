@@ -96,7 +96,7 @@ const BookingSummary = () => {
                   <div className="flex items-center">
                     <FaMapMarkerAlt className="mr-3 text-gray-500" />
                     <span className="font-medium">{t('bookingSummary.departureLocation')}:</span>
-                    <span className="ml-2">Douala</span>
+                    <span className="ml-2">Douala, {bookingData.pickupQuarter}</span>
                   </div>
                   <div className="flex items-center">
                     <FaMapMarkerAlt className="mr-3 text-gray-500" />
