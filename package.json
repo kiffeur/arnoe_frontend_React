@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.1.1",
     "@types/react-datepicker": "^6.2.0",
     "aos": "^2.3.4",
+    "axios": "^1.7.9",
     "framer-motion": "^11.16.0",
     "i18next": "^24.2.1",
     "react": "^18.2.0",

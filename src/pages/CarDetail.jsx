@@ -15,6 +15,7 @@ import { cameroonCities } from '../data/cities';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { toast } from 'react-toastify';
+import { translateDescription } from '../utils/descriptionTranslations';
 
 const CarDetail = () => {
   const { t, i18n } = useTranslation();
@@ -71,14 +72,13 @@ const CarDetail = () => {
   }, [id, t]);
 
   useEffect(() => {
-    const translateDescription = async () => {
-      if (car?.description) {
-        const translated = await translateWithCache(car.description, i18n.language);
-        setTranslatedDescription(translated);
-      }
-    };
-
-    translateDescription();
+    if (car?.description) {
+      const translated = translateDescription(car.description, i18n.language);
+      console.log('Original Description:', car.description);
+      console.log('Current Language:', i18n.language);
+      console.log('Translated Description:', translated);
+      setTranslatedDescription(translated);
+    }
   }, [car?.description, i18n.language]);
 
   const handleInputChange = (e) => {

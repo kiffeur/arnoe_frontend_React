@@ -44,23 +44,50 @@ export const descriptionTranslations = {
   "La Honda Civic 2024 représente l'équilibre parfait entre sportivité et praticité. Son design dynamique, son intérieur ergonomique et ses performances impressionnantes en font une berline compacte exceptionnelle. Idéale pour la ville et les escapades.": {
     en: "The 2024 Honda Civic represents the perfect balance between sportiness and practicality. Its dynamic design, ergonomic interior, and impressive performance make it an exceptional compact sedan. Ideal for city driving and getaways.",
     de: "Der Honda Civic 2024 stellt die perfekte Balance zwischen Sportlichkeit und Praktikabilität dar. Sein dynamisches Design, ergonomischer Innenraum und beeindruckende Leistung machen ihn zu einer außergewöhnlichen Kompaktlimousine. Ideal für Stadtfahrten und Ausflüge."
+  },
+  // Descriptions génériques
+  "Véhicule polyvalent et confortable pour tous vos déplacements": {
+    fr: "Véhicule polyvalent et confortable pour tous vos déplacements",
+    en: "Versatile and comfortable vehicle for all your travels",
+    de: "Vielseitiges und komfortables Fahrzeug für alle Ihre Reisen"
+  },
+  "Parfait pour les déplacements en ville et sur route": {
+    fr: "Parfait pour les déplacements en ville et sur route",
+    en: "Perfect for city and road trips",
+    de: "Perfekt für Stadt- und Autobahnfahrten"
   }
 };
 
-/**
- * Traduit une description de voiture dans la langue spécifiée
- * @param {string} originalDescription - Description originale en français
- * @param {string} targetLanguage - Code de langue cible (en, fr, de)
- * @returns {string} Description traduite ou description originale si pas de traduction
- */
-export const translateDescription = (originalDescription, targetLanguage) => {
-  if (targetLanguage === 'fr') return originalDescription;
-  
-  const translations = descriptionTranslations[originalDescription];
-  if (!translations) {
-    console.log('No translation found for:', originalDescription);
-    return originalDescription;
+// Fonction de traduction avec mapping statique
+export const translateDescription = (description, targetLanguage) => {
+  console.log('Translation Request:', { description, targetLanguage });
+
+  // 1. Vérifier si la description existe exactement dans notre mapping
+  if (descriptionTranslations[description]) {
+    const translatedText = descriptionTranslations[description][targetLanguage] || description;
+    console.log('Exact Match Translation:', translatedText);
+    return translatedText;
   }
-  
-  return translations[targetLanguage] || originalDescription;
+
+  // 2. Vérifier des correspondances partielles
+  const partialMatch = Object.keys(descriptionTranslations).find(key => 
+    description.includes(key)
+  );
+
+  if (partialMatch) {
+    const translatedText = descriptionTranslations[partialMatch][targetLanguage] || description;
+    console.log('Partial Match Translation:', translatedText);
+    return translatedText;
+  }
+
+  // 3. Traductions génériques si pas de mapping spécifique
+  const genericTranslations = {
+    'fr': description,
+    'en': description,  // Remplacer par une logique de traduction si nécessaire
+    'de': description   // Remplacer par une logique de traduction si nécessaire
+  };
+
+  const fallbackTranslation = genericTranslations[targetLanguage] || description;
+  console.log('Fallback Translation:', fallbackTranslation);
+  return fallbackTranslation;
 };
