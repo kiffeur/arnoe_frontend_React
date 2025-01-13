@@ -40,7 +40,7 @@ const CarDetail = () => {
     pickupQuarter: '',
     pickupCity: 'Douala',
     dropoffCity: 'Douala',
-    destination: localStorage.getItem('searchDestination') || ''
+    destination: ''
   });
   const [totalPrice, setTotalPrice] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -81,6 +81,24 @@ const CarDetail = () => {
       setTranslatedDescription(translated);
     }
   }, [car?.description, i18n.language]);
+
+  useEffect(() => {
+    // Convertir les dates du localStorage en objets Date si nécessaire
+    const pickupDateFromStorage = localStorage.getItem('searchPickupDate');
+    const dropoffDateFromStorage = localStorage.getItem('searchDropoffDate');
+    const destinationFromStorage = localStorage.getItem('searchDestination');
+
+    console.log('Pickup Date from Storage:', pickupDateFromStorage);
+    console.log('Dropoff Date from Storage:', dropoffDateFromStorage);
+    console.log('Destination from Storage:', destinationFromStorage);
+
+    setBookingForm(prev => ({
+      ...prev,
+      ...(pickupDateFromStorage && { pickupDate: pickupDateFromStorage }),
+      ...(dropoffDateFromStorage && { dropoffDate: dropoffDateFromStorage }),
+      ...(destinationFromStorage && { destination: destinationFromStorage })
+    }));
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

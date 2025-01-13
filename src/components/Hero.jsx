@@ -92,6 +92,19 @@ const Hero = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    // Sauvegarder la ville de destination dans le localStorage
+    localStorage.setItem('searchDestination', dropoffLocation);
+    
+    // Sauvegarder les dates dans le localStorage
+    if (pickupDate) {
+      localStorage.setItem('searchPickupDate', pickupDate.toLocaleDateString('fr-CA'));
+      console.log('Pickup Date Saved:', pickupDate.toLocaleDateString('fr-CA'));
+    }
+    if (dropoffDate) {
+      localStorage.setItem('searchDropoffDate', dropoffDate.toLocaleDateString('fr-CA'));
+      console.log('Dropoff Date Saved:', dropoffDate.toLocaleDateString('fr-CA'));
+    }
+
     // Redirection vers la page de recherche avec les paramètres
     navigate('/search', { 
       state: { 

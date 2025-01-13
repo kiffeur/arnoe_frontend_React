@@ -22,7 +22,7 @@ const SearchResults = () => {
     carType: searchParams.carType || '',
     transmission: '',
     fuelType: '',
-    destination: searchParams.destination || '',
+    destination: localStorage.getItem('searchDestination') || searchParams.destination || '',
     hasAC: false,
     hasRearCamera: false,
     hasTouchScreen: false,
