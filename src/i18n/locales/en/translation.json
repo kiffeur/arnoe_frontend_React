@@ -187,7 +187,8 @@
     "terms": "terms of use",
     "total": "Total Price",
     "processing": "Processing...",
-    "confirmBooking": "Confirm Booking"
+    "confirmBooking": "Confirm Booking",
+    "destination4x4Requirement": "Only 4x4 vehicles can access this destination"
   },
   "bookingSummary": {
     "title": "Booking Summary",
@@ -251,7 +252,7 @@
         "options": {
           "berline": "Sedan",
           "suv5": "SUV 5 seats",
-          "suv7": "SUV 7 seats", 
+          "suv7": "SUV 7 seats",
           "pickup": "Pickup",
           "premium": "Premium"
         }
@@ -261,7 +262,7 @@
         "all": "All",
         "options": {
           "2": "2 seats",
-          "4": "4 seats", 
+          "4": "4 seats",
           "5": "5 seats",
           "7": "7 seats"
         }
@@ -272,6 +273,11 @@
         "rearCamera": "Rear Camera",
         "touchScreen": "Touch Screen",
         "fourByFour": "4x4"
+      },
+      "destination": {
+        "label": "Destination",
+        "all": "All destinations",
+        "requirement4x4": "Only 4x4 vehicles can access this destination"
       },
       "mobile": {
         "show": "Show Filters",

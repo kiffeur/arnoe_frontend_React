@@ -8,6 +8,21 @@ import { getAllCars } from '../services/api';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+const cameroonCityNames = [
+  'Douala',
+  'Yaoundé',
+  'Bafoussam',
+  'Bamenda',
+  'Bertoua',
+  'Buea',
+  'Kribi',
+  'Limbé',
+  'Ebolowa',
+  'Edéa',
+  'Kumba',
+  'Foumban'
+];
+
 const SearchResults = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -30,6 +45,35 @@ const SearchResults = () => {
     priceRange: [0, 1000000]
   });
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+  // Destinations nécessitant un 4x4
+  const require4x4Destinations = [
+    'Bafoussam', 
+    'Bamenda', 
+    'Bertoua', 
+    'Buea', 
+    'Limbé', 
+    'Ebolowa', 
+    'Kumba', 
+    'Foumban'
+  ];
+
+  const flexDestinations = [
+    'Douala', 
+    'Kribi', 
+    'Edéa', 
+    'Yaoundé'
+  ];
+
+  const handleDestinationChange = (destination) => {
+    setFilters(prevFilters => ({
+      ...prevFilters, 
+      destination,
+      // Réinitialiser is4x4 uniquement si la destination nécessite un 4x4
+      is4x4: require4x4Destinations.includes(destination) ? true : prevFilters.is4x4
+    }));
+    localStorage.setItem('searchDestination', destination);
+  };
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -80,84 +124,41 @@ const SearchResults = () => {
     }));
   };
 
-  const handleDestinationChange = (destination) => {
-    setFilters(prev => ({
-      ...prev,
-      destination: destination
-    }));
-    // Sauvegarder la destination dans le localStorage
-    localStorage.setItem('searchDestination', destination);
-  };
-
-  const filteredCars = cars.filter(car => {
+  // Filtrage des voitures
+  const filteredCars = cars.filter((car) => {
     // Filtre par type de voiture
-    if (filters.carType) {
-      const carTypeValue = car.carType ? car.carType.toLowerCase() : '';
-      const filterTypeValue = filters.carType.toLowerCase();
-      
-      if (!carTypeValue.includes(filterTypeValue) && !filterTypeValue.includes(carTypeValue)) {
-        return false;
-      }
-    }
-
-    // Filtre par destination
-    if (filters.destination) {
-      const carDestination = car.destination ? car.destination.toLowerCase() : '';
-      const selectedDestination = filters.destination.toLowerCase();
-      
-      // Villes nécessitant des voitures 4x4
-      const require4x4Destinations = [
-        'bafoussam', 
-        'bamenda', 
-        'bertoua', 
-        'buea', 
-        'limbé', 
-        'ebolowa', 
-        'kumba', 
-        'foumban'
-      ];
-
-      // Villes sans contrainte 4x4
-      const flexDestinations = [
-        'kribi', 
-        'douala', 
-        'edéa', 
-        'yaoundé'
-      ];
-
-      // Si la destination requiert 4x4
-      if (require4x4Destinations.includes(selectedDestination)) {
-        // Filtrer uniquement les voitures 4x4
-        if (!car.is4x4) {
-          return false;
-        }
-      }
-
-      // Vérifier la correspondance de destination
-      if (!carDestination.includes(selectedDestination) && !selectedDestination.includes(carDestination)) {
-        return false;
-      }
-    }
-
+    const matchCarType = !filters.carType || car.carType === filters.carType;
+    
     // Filtre par nombre de sièges
-    if (filters.seats && parseInt(car.seats) !== parseInt(filters.seats)) {
-      return false;
-    }
+    const matchSeats = !filters.seats || car.seats.toString() === filters.seats;
+    
+    // Filtre par destination
+    const matchDestination = !filters.destination || 
+      (flexDestinations.includes(filters.destination) || 
+       (require4x4Destinations.includes(filters.destination) && car.is4x4));
+    
+    // Filtre par 4x4
+    const match4x4 = !filters.is4x4 || car.is4x4;
+    
+    // Autres filtres
+    const matchAC = !filters.hasAC || car.hasAC;
+    const matchRearCamera = !filters.hasRearCamera || car.hasRearCamera;
+    const matchTouchScreen = !filters.hasTouchScreen || car.hasTouchScreen;
 
-    // Filtres des options
-    if (filters.hasAC && !car.hasAC) return false;
-    if (filters.hasRearCamera && !car.hasRearCamera) return false;
-    if (filters.hasTouchScreen && !car.hasTouchScreen) return false;
-    if (filters.is4x4 && !car.is4x4) return false;
-
-    // Filtre par prix
-    const carPrice = parseFloat(car.pricePerDay);
-    if (carPrice < filters.priceRange[0] || carPrice > filters.priceRange[1]) {
-      return false;
-    }
-
-    return true;
+    return matchCarType && 
+           matchSeats && 
+           matchDestination && 
+           match4x4 && 
+           matchAC && 
+           matchRearCamera && 
+           matchTouchScreen;
   });
+
+  // Modification de la logique de désactivation des options de destination
+  const isDestinationDisabled = () => {
+    // Aucune destination ne doit être grisée
+    return false;
+  };
 
   if (loading) {
     return (
@@ -254,22 +255,21 @@ const SearchResults = () => {
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">{t('searchResults.filters.destination.all')}</option>
-                  <option value="Douala">Douala</option>
-                  <option value="Yaoundé">Yaoundé</option>
-                  <option value="Bafoussam">Bafoussam</option>
-                  <option value="Bamenda">Bamenda</option>
-                  <option value="Bertoua">Bertoua</option>
-                  <option value="Buea">Buea</option>
-                  <option value="Kribi">Kribi</option>
-                  <option value="Limbé">Limbé</option>
-                  <option value="Ebolowa">Ebolowa</option>
-                  <option value="Edéa">Edéa</option>
-                  <option value="Kumba">Kumba</option>
-                  <option value="Foumban">Foumban</option>
+                  {cameroonCityNames.map((destination, index) => (
+                    <option 
+                      key={index} 
+                      value={destination}
+                      disabled={isDestinationDisabled()}
+                    >
+                      {destination}
+                    </option>
+                  ))}
                 </select>
-                {filters.destination && !['Kribi', 'Douala', 'Edéa', 'Yaoundé'].includes(filters.destination) && (
-                  <p className="text-sm text-blue-600 mt-2">
-                    {t('searchResults.filters.destination.4x4Requirement')}
+                {filters.destination && 
+                  require4x4Destinations.includes(filters.destination) && 
+                  !filters.is4x4 && (
+                  <p className="text-sm text-yellow-600 mt-2">
+                    {t('searchResults.filters.destination.requirement4x4')}
                   </p>
                 )}
               </div>
@@ -390,22 +390,21 @@ const SearchResults = () => {
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                       >
                         <option value="">{t('searchResults.filters.destination.all')}</option>
-                        <option value="Douala">Douala</option>
-                        <option value="Yaoundé">Yaoundé</option>
-                        <option value="Bafoussam">Bafoussam</option>
-                        <option value="Bamenda">Bamenda</option>
-                        <option value="Bertoua">Bertoua</option>
-                        <option value="Buea">Buea</option>
-                        <option value="Kribi">Kribi</option>
-                        <option value="Limbé">Limbé</option>
-                        <option value="Ebolowa">Ebolowa</option>
-                        <option value="Edéa">Edéa</option>
-                        <option value="Kumba">Kumba</option>
-                        <option value="Foumban">Foumban</option>
+                        {cameroonCityNames.map((destination, index) => (
+                          <option 
+                            key={index} 
+                            value={destination}
+                            disabled={isDestinationDisabled()}
+                          >
+                            {destination}
+                          </option>
+                        ))}
                       </select>
-                      {filters.destination && !['Kribi', 'Douala', 'Edéa', 'Yaoundé'].includes(filters.destination) && (
-                        <p className="text-sm text-blue-600 mt-2">
-                          {t('searchResults.filters.destination.4x4Requirement')}
+                      {filters.destination && 
+                        require4x4Destinations.includes(filters.destination) && 
+                        !filters.is4x4 && (
+                        <p className="text-sm text-yellow-600 mt-2">
+                          {t('searchResults.filters.destination.requirement4x4')}
                         </p>
                       )}
                     </div>

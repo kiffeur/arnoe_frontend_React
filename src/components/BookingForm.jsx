@@ -221,7 +221,10 @@ const BookingForm = ({
               </option>
             ))}
           </select>
-          {!is4x4 && (
+          {!is4x4 && allowedDestinations.some(dest => 
+            ['Bafoussam', 'Bamenda', 'Bertoua', 'Buea', 'Limbé', 'Ebolowa', 'Kumba', 'Foumban']
+              .includes(dest)
+          ) && (
             <p className="text-sm text-yellow-600 mt-2">
               {t('bookingForm.destination4x4Requirement')}
             </p>

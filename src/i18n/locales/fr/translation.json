@@ -182,7 +182,7 @@
     "phonePlaceholder": "Votre numéro de téléphone",
     "destination": "Destination",
     "selectDestination": "Sélectionnez une destination",
-    "destination4x4Requirement": "Seules Douala, Kribi et Edéa sont disponibles pour ce véhicule. Pour d'autres destinations, sélectionnez un véhicule 4x4.",
+    "destination4x4Requirement": "Seules les voitures 4x4 peuvent accéder à cette destination",
     "bookingDetails": "Détails de la réservation",
     "departureCity": "Ville de départ",
     "returnCity": "Ville de retour",
@@ -262,6 +262,23 @@
         "show": "Afficher les filtres",
         "hide": "Masquer les filtres"
       },
+      "destination": {
+        "label": "Destination",
+        "all": "Toutes les destinations",
+        "requirement4x4": "Seules les voitures 4x4 peuvent accéder à cette destination",
+        "douala": "Douala",
+        "yaoundé": "Yaoundé",
+        "bafoussam": "Bafoussam",
+        "bamenda": "Bamenda",
+        "bertoua": "Bertoua",
+        "buea": "Buea",
+        "kribi": "Kribi",
+        "limbé": "Limbé",
+        "ebolowa": "Ebolowa",
+        "edéa": "Edéa",
+        "kumba": "Kumba",
+        "foumban": "Foumban"
+      },
       "carType": {
         "label": "Type de voiture",
         "all": "Tous les types",
@@ -282,11 +299,6 @@
           "7": "7 places"
         }
       },
-      "destination": {
-        "label": "Destination",
-        "all": "Toutes les destinations",
-        "4x4Requirement": "Pour cette destination, seules les voitures 4x4 sont disponibles"
-      },
       "options": {
         "label": "Options supplémentaires",
         "ac": "Climatisation",
@@ -306,5 +318,19 @@
         "twoByFour": "2x4"
       }
     }
+  },
+  "cities": {
+    "douala": "Douala",
+    "yaoundé": "Yaoundé",
+    "bafoussam": "Bafoussam",
+    "bamenda": "Bamenda",
+    "bertoua": "Bertoua",
+    "buea": "Buea",
+    "kribi": "Kribi",
+    "limbé": "Limbé",
+    "ebolowa": "Ebolowa",
+    "edéa": "Edéa",
+    "kumba": "Kumba",
+    "foumban": "Foumban"
   }
 }
