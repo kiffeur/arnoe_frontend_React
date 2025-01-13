@@ -191,17 +191,20 @@
     "pickupDate": "Date de début",
     "dropoffDate": "Date de fin",
     "paymentMethod": "Mode de paiement",
+    "bankTransfer": "Virement bancaire",
     "mobileMoney": "Mobile Money",
     "creditCard": "Carte de crédit",
     "cash": "Espèces",
-    "bankTransfer": "Virement bancaire",
-    "mobileOperator": "Opérateur Mobile Money",
+    "mobileOperator": "Opérateur Mobile",
     "selectOperator": "Sélectionnez un opérateur",
     "acceptTerms": "J'accepte les",
     "terms": "conditions d'utilisation",
     "total": "Prix total",
     "processing": "Traitement en cours...",
-    "confirmBooking": "Confirmer la réservation"
+    "confirmBooking": "Confirmer la réservation",
+    "internationalPayment": "Hors du Cameroun",
+    "internationalPaymentMethod": "Méthode de paiement international",
+    "selectInternationalPayment": "Sélectionnez un mode de paiement"
   },
   "bookingSummary": {
     "title": "Résumé de la Réservation",
@@ -225,6 +228,8 @@
     "total": "Total",
     "paymentMethod": "Méthode de Paiement",
     "mobileMoneyNumber": "Numéro Mobile Money",
+    "destination": "Destination",
+    "paymentMode": "Mode de paiement",
     "status": {
       "pending": "En Attente",
       "confirmed": "Confirmée",
@@ -232,7 +237,8 @@
     },
     "downloadPdf": "Télécharger la facture",
     "printReceipt": "Imprimer le Reçu",
-    "backToHome": "Retour à l'Accueil"
+    "backToHome": "Retour à l'Accueil",
+    "bookingConfirmationMessage": "Merci d'avoir choisi nos services. Voici le résumé de votre réservation."
   },
   "accommodation": {
     "title": "Choisissez Votre Hébergement",

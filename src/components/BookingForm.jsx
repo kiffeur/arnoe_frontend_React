@@ -7,7 +7,8 @@ import {
   FaPhone, 
   FaMobileAlt,  
   FaCreditCard,  
-  FaWallet      
+  FaWallet,
+  FaGlobeAmericas      
 } from 'react-icons/fa';
 import { cameroonCities } from '../data/cities';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +29,7 @@ const BookingForm = ({
   mobileOperator,
   setMobileOperator,
   totalPrice,
+  setTotalPrice, // Ajout de la fonction setTotalPrice
   setShowTerms,
   isSubmitting,
   selectedDestination, // Nouvelle prop pour la destination
@@ -122,6 +124,16 @@ const BookingForm = ({
         value: date ? date.toISOString().split('T')[0] : ''
       }
     });
+  };
+
+  // Calculer le prix total
+  const calculateTotalPrice = () => {
+    if (bookingForm.pickupDate && bookingForm.dropoffDate) {
+      const days = Math.ceil((new Date(bookingForm.dropoffDate) - new Date(bookingForm.pickupDate)) / (1000 * 60 * 60 * 24) + 1);
+      const total = car.pricePerDay * days;
+      return total;
+    }
+    return 0;
   };
 
   return (
@@ -351,30 +363,30 @@ const BookingForm = ({
             />
             <FaCreditCard className="text-4xl mb-3 text-blue-600" />
             <span className="font-semibold text-sm">
-              {t('bookingForm.creditCard')}
+              {t('bookingForm.bankTransfer')}
             </span>
           </label>
 
-          {/* Cash Option */}
+          {/* Paiement international */}
           <label 
-            htmlFor="cash" 
+            htmlFor="international" 
             className={`flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
-              ${paymentMethod === 'cash' 
+              ${paymentMethod === 'international' 
                 ? 'bg-green-50 border-green-500 text-green-700' 
                 : 'bg-white border-gray-200 text-gray-600 hover:border-green-300'}`}
           >
             <input
               type="radio"
-              id="cash"
+              id="international"
               name="paymentMethod"
-              value="cash"
-              checked={paymentMethod === 'cash'}
+              value="international"
+              checked={paymentMethod === 'international'}
               onChange={(e) => setPaymentMethod(e.target.value)}
               className="hidden"
             />
-            <FaWallet className="text-4xl mb-3 text-green-600" />
-            <span className="font-semibold text-sm">
-              {t('bookingForm.cash')}
+            <FaGlobeAmericas className="text-4xl mb-3 text-green-600" />
+            <span className="font-semibold text-sm text-center w-full">
+              {t('bookingForm.internationalPayment')}
             </span>
           </label>
         </div>
@@ -415,6 +427,24 @@ const BookingForm = ({
             </div>
           </div>
         )}
+
+        {/* Options de paiement international */}
+        {paymentMethod === 'international' && (
+          <div className="mt-4 w-full">
+            <label className="block text-sm text-gray-600 mb-2">
+              {t('bookingForm.internationalPaymentMethod')}
+            </label>
+            <select
+              value={mobileOperator}
+              onChange={(e) => setMobileOperator(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">{t('bookingForm.selectInternationalPayment')}</option>
+              <option value="western_union">Western Union</option>
+              <option value="taptap_send">TAPTAP Send</option>
+            </select>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center mb-6">
@@ -440,19 +470,23 @@ const BookingForm = ({
       <div className="bg-blue-50 p-6 rounded-lg mb-6">
         <div className="flex justify-between items-center">
           <span className="text-gray-700">{t('bookingForm.total')}</span>
-          <span className="text-2xl font-bold text-blue-600">{totalPrice} FCFA</span>
+          <span className="text-2xl font-bold text-blue-600">
+            {calculateTotalPrice()} FCFA
+          </span>
         </div>
         <p className="text-sm text-gray-500 mt-2">
-          {car.pricePerDay} FCFA × {Math.ceil((new Date(bookingForm.dropoffDate) - new Date(bookingForm.pickupDate)) / (1000 * 60 * 60 * 24) + 1)} jours
+          {car.pricePerDay} FCFA × {bookingForm.pickupDate && bookingForm.dropoffDate 
+            ? Math.ceil((new Date(bookingForm.dropoffDate) - new Date(bookingForm.pickupDate)) / (1000 * 60 * 60 * 24) + 1)
+            : 0} jours
         </p>
       </div>
 
       <button
         type="submit"
         onClick={handleSubmit}
-        disabled={isSubmitting || !termsAccepted || !paymentMethod || (paymentMethod === 'mobile' && !mobileOperator)}
+        disabled={isSubmitting || !termsAccepted || !paymentMethod || (paymentMethod === 'mobile' && !mobileOperator) || (paymentMethod === 'international' && !mobileOperator)}
         className={`w-full py-3 rounded-lg transition-colors ${
-          isSubmitting || !termsAccepted || !paymentMethod || (paymentMethod === 'mobile' && !mobileOperator)
+          isSubmitting || !termsAccepted || !paymentMethod || (paymentMethod === 'mobile' && !mobileOperator) || (paymentMethod === 'international' && !mobileOperator)
             ? 'bg-gray-400 cursor-not-allowed'
             : 'bg-blue-600 hover:bg-blue-700'
         } text-white`}

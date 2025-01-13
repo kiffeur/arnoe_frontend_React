@@ -76,6 +76,10 @@ const AdminBookings = () => {
         return 'Orange Money';
       case 'mobile_mtn':
         return 'MTN Money';
+      case 'taptap_send':
+        return 'TAPTAP Send';
+      case 'western_union':
+        return 'Western Union';
       default:
         return method || 'Non spécifié';
     }

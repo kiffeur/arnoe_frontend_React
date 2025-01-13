@@ -114,49 +114,39 @@ const CarDetail = () => {
   };
 
   const calculateTotalPrice = (startDate, endDate) => {
-    if (startDate && endDate && car) {
+    if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       const diffTime = Math.abs(end - start);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-      setTotalPrice(car.pricePerDay * diffDays);
+      const total = Number(car.pricePerDay) * diffDays;
+      
+      console.log('Price Calculation Debug:', {
+        startDate,
+        endDate,
+        pricePerDay: car.pricePerDay,
+        diffDays,
+        total
+      });
+
+      setTotalPrice(total);
+      return total;
     }
+    setTotalPrice(0);
+    return 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!termsAccepted) {
-      toast.error(t('carDetail.errors.acceptTerms'));
-      return;
-    }
-    if (!paymentMethod) {
-      toast.error(t('carDetail.errors.selectPayment'));
-      return;
-    }
-    if (paymentMethod === 'mobile' && !mobileOperator) {
-      toast.error(t('carDetail.errors.selectOperator'));
-      return;
-    }
-
     setIsSubmitting(true);
-    try {
-      // Prepare data for API
-      const bookingData = {
-        firstName: bookingForm.firstName,
-        lastName: bookingForm.lastName,
-        phone: bookingForm.phone,
-        email: bookingForm.email,
-        address: bookingForm.pickupQuarter,
-        paymentMethod: paymentMethod === 'mobile' 
-          ? `mobile_${mobileOperator}` 
-          : 'bank_transfer',
-        carId: parseInt(car.id),
-        startDate: new Date(bookingForm.pickupDate).toISOString(),
-        endDate: new Date(bookingForm.dropoffDate).toISOString(),
-        userId: 1, // Replace with real user ID once authentication is implemented
-        totalPrice: totalPrice
-      };
 
+    // Calcul explicite du prix total avant soumission
+    const calculatedTotalPrice = calculateTotalPrice(
+      bookingForm.pickupDate, 
+      bookingForm.dropoffDate
+    );
+
+    try {
       // Call booking API
       const response = await createBooking({
         ...bookingForm,
@@ -168,7 +158,19 @@ const CarDetail = () => {
         endDate: new Date(bookingForm.dropoffDate).toISOString(),
         userId: 1,
         address: bookingForm.pickupQuarter,
-        totalPrice: totalPrice
+        totalPrice: calculatedTotalPrice // Utilisation du prix calculé
+      });
+
+      console.log('Booking Details:', {
+        paymentMethod: paymentMethod === 'mobile' 
+          ? `mobile_${mobileOperator}` 
+          : 'bank_transfer',
+        carId: parseInt(car.id),
+        startDate: new Date(bookingForm.pickupDate).toISOString(),
+        endDate: new Date(bookingForm.dropoffDate).toISOString(),
+        userId: 1,
+        address: bookingForm.pickupQuarter,
+        totalPrice: calculatedTotalPrice
       });
 
       // Redirect to booking summary page
@@ -179,7 +181,7 @@ const CarDetail = () => {
             carId: car.id,
             carName: car.name,
             carImage: car.imageUrl,
-            totalPrice: totalPrice,
+            totalPrice: calculatedTotalPrice,
             pricePerDay: car.pricePerDay,
             paymentMethod,
             paymentDetails: paymentMethod === 'mobile' ? 
@@ -283,24 +285,6 @@ const CarDetail = () => {
                       <span className="text-sm">{feature.value}</span>
                     </div>
                   ))}
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 mt-8">
-                  <div className="flex flex-col items-center p-4 bg-gray-50">
-                    <FaSnowflake className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{t('carDetail.features.airConditioning')}</span>
-                    <span className="text-xs text-gray-500">{car.hasAC ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-gray-50">
-                    <FaCamera className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{t('carDetail.features.backupCamera')}</span>
-                    <span className="text-xs text-gray-500">{car.hasRearCamera ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
-                  </div>
-                  <div className="flex flex-col items-center p-4 bg-gray-50">
-                    <FaTablet className="text-blue-600 text-xl mb-2" />
-                    <span className="text-sm">{t('carDetail.features.touchScreen')}</span>
-                    <span className="text-xs text-gray-500">{car.hasTouchScreen ? t('carDetail.features.yes') : t('carDetail.features.no')}</span>
-                  </div>
                 </div>
               </div>
             </div>

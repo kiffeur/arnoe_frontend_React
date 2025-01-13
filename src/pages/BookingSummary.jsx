@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCar, FaCheck } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaPhone, FaEnvelope, FaCar, FaCheck, FaCreditCard, FaWallet } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import jsPDF from 'jspdf';
@@ -14,6 +14,12 @@ const BookingSummary = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { bookingData } = location.state || {};
+
+  // Conversion explicite en chaînes
+  const safeValue = (value) => {
+    if (value === null || value === undefined) return 'N/A';
+    return String(value);
+  };
 
   if (!bookingData) {
     navigate('/');
@@ -50,6 +56,13 @@ const BookingSummary = () => {
     console.log('Price Per Day:', pricePerDay);
     console.log('Total Price:', totalPrice);
     console.log('Days:', days);
+
+    // Ajout de logs détaillés pour le calcul du prix
+    if (bookingData) {
+      const calculatedTotalPrice = Number(bookingData.pricePerDay) * calculateDays();
+      console.log('Calculated Total Price:', calculatedTotalPrice);
+      console.log('Stored Total Price:', bookingData.totalPrice);
+    }
   }, [bookingData]);
 
   // Fonction de formatage des prix
@@ -72,12 +85,6 @@ const BookingSummary = () => {
       alert('Aucune donnée de réservation trouvée. Veuillez réessayer.');
       return;
     }
-
-    // Conversion explicite en chaînes
-    const safeValue = (value) => {
-      if (value === null || value === undefined) return 'N/A';
-      return String(value);
-    };
 
     // Calculs financiers précis
     const pricePerDayNumeric = Number(bookingData.pricePerDay);
@@ -147,6 +154,7 @@ const BookingSummary = () => {
     pdf.text(`Date de Fin: ${formatDate(bookingData.dropoffDate)}`, 20, 171);
     pdf.text(`Durée: ${days} jours`, 20, 178);
     pdf.text(`Lieu: ${safeValue(bookingData.pickupQuarter)}, ${safeValue(bookingData.pickupCity)}`, 20, 185);
+    pdf.text(`Destination: ${safeValue(bookingData.destination)}`, 20, 192);
 
     // Section Financière avec mise en valeur
     pdf.setFontSize(14);
@@ -165,8 +173,12 @@ const BookingSummary = () => {
     
     pdf.setFontSize(12);
     pdf.setTextColor(...COLORS.TEXT);
-    pdf.text(`Méthode de Paiement: ${safeValue(bookingData.paymentMethod)}`, 20, 240);
-    pdf.text(`Détails: ${safeValue(bookingData.paymentDetails)}`, 20, 247);
+    pdf.text(`Méthode de Paiement: ${
+      safeValue(bookingData.paymentMethod) === 'creditCard' 
+        ? 'Virement bancaire' 
+        : safeValue(bookingData.paymentMethod)
+    }`, 20, 240);
+    pdf.text(`Mode de Paiement: ${safeValue(bookingData.paymentMode)}`, 20, 247);
 
     // Pied de page
     pdf.setFontSize(10);
@@ -234,6 +246,11 @@ const BookingSummary = () => {
                   </div>
                   <div className="flex items-center">
                     <FaMapMarkerAlt className="mr-3 text-gray-500" />
+                    <span className="font-medium">{t('bookingSummary.destination')}:</span>
+                    <span className="ml-2">{bookingData.destination}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <FaMapMarkerAlt className="mr-3 text-gray-500" />
                     <span className="font-medium">{t('bookingSummary.duration')}:</span>
                     <span className="ml-2">{calculateDays()} {t('bookingSummary.days')}</span>
                   </div>
@@ -289,14 +306,12 @@ const BookingSummary = () => {
                   </div>
                   <div className="mt-4">
                     <span className="font-medium">{t('bookingSummary.paymentMethod')}:</span>
-                    <span className="ml-2">{bookingData.paymentMethod}</span>
+                    <span className="ml-2">
+                      {bookingData.paymentMethod === 'creditCard' 
+                        ? 'Virement bancaire' 
+                        : bookingData.paymentMethod}
+                    </span>
                   </div>
-                  {bookingData.paymentMethod === 'Mobile Money' && (
-                    <div>
-                      <span className="font-medium">{t('bookingSummary.mobileMoneyNumber')}:</span>
-                      <span className="ml-2">{bookingData.mobileOperator}</span>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
