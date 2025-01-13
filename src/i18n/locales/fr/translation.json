@@ -8,7 +8,7 @@
   },
   "hero": {
     "title": "Voyagez en Toute Sérénité avec nos Chauffeurs Professionnels",
-    "description": "Découvrez le Cameroun en toute sécurité avec notre service de location voiture avec chauffeur. Des conducteurs expérimentés, des véhicules confortables et un service disponible 24/7 pour tous vos déplacements.",
+    "description": "Découvrez le Cameroun en toute sécurité avec notre service de location voitures avec chauffeur. Des conducteurs expérimentés, des véhicules confortables et un service disponible 24/7 pour tous vos déplacements.",
     "pickupCity": "Ville de départ",
     "dropoffCity": "Ville d'arrivée",
     "pickupDate": "Date de départ",
@@ -255,20 +255,23 @@
     "error": "Une erreur est survenue lors du chargement des voitures",
     "filters": {
       "title": "Filtres",
+      "mobile": {
+        "show": "Afficher les filtres",
+        "hide": "Masquer les filtres"
+      },
       "carType": {
         "label": "Type de voiture",
         "all": "Tous les types",
         "options": {
           "berline": "Berline",
           "suv5": "SUV 5 places",
-          "suv7": "SUV 7 places", 
-          "pickup": "Pickup",
-          "premium": "Premium"
+          "suv7": "SUV 7 places",
+          "pickup": "Pickup"
         }
       },
       "seats": {
-        "label": "Nombre de sièges",
-        "all": "Tous",
+        "label": "Nombre de places",
+        "all": "Toutes les places",
         "options": {
           "2": "2 places",
           "4": "4 places", 
@@ -276,28 +279,29 @@
           "7": "7 places"
         }
       },
+      "destination": {
+        "label": "Destination",
+        "all": "Toutes les destinations",
+        "4x4Requirement": "Pour cette destination, seules les voitures 4x4 sont disponibles"
+      },
       "options": {
-        "label": "Options",
+        "label": "Options supplémentaires",
         "ac": "Climatisation",
         "rearCamera": "Caméra de recul",
         "touchScreen": "Écran tactile",
         "fourByFour": "4x4"
       },
-      "mobile": {
-        "show": "Afficher les filtres",
-        "hide": "Masquer les filtres"
-      },
       "apply": "Appliquer"
     },
-    "noResults": "Aucune voiture ne correspond à vos critères",
+    "noResults": "Aucun résultat trouvé",
     "carCard": {
-      "pricePerDay": "/ Jour",
-      "seats": "Places",
+      "pricePerDay": "/ jour",
+      "seats": "places",
+      "bookButton": "Réserver",
       "driveType": {
         "fourByFour": "4x4",
         "twoByFour": "2x4"
-      },
-      "bookButton": "Réserver"
+      }
     }
   }
 }

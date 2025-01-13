@@ -22,6 +22,7 @@ const SearchResults = () => {
     carType: searchParams.carType || '',
     transmission: '',
     fuelType: '',
+    destination: searchParams.destination || '',
     hasAC: false,
     hasRearCamera: false,
     hasTouchScreen: false,
@@ -90,6 +91,45 @@ const SearchResults = () => {
       }
     }
 
+    // Filtre par destination
+    if (filters.destination) {
+      const carDestination = car.destination ? car.destination.toLowerCase() : '';
+      const selectedDestination = filters.destination.toLowerCase();
+      
+      // Villes nécessitant des voitures 4x4
+      const require4x4Destinations = [
+        'bafoussam', 
+        'bamenda', 
+        'bertoua', 
+        'buea', 
+        'limbé', 
+        'ebolowa', 
+        'kumba', 
+        'foumban'
+      ];
+
+      // Villes sans contrainte 4x4
+      const flexDestinations = [
+        'kribi', 
+        'douala', 
+        'edéa', 
+        'yaoundé'
+      ];
+
+      // Si la destination requiert 4x4
+      if (require4x4Destinations.includes(selectedDestination)) {
+        // Filtrer uniquement les voitures 4x4
+        if (!car.is4x4) {
+          return false;
+        }
+      }
+
+      // Vérifier la correspondance de destination
+      if (!carDestination.includes(selectedDestination) && !selectedDestination.includes(carDestination)) {
+        return false;
+      }
+    }
+
     // Filtre par nombre de sièges
     if (filters.seats && parseInt(car.seats) !== parseInt(filters.seats)) {
       return false;
@@ -102,7 +142,8 @@ const SearchResults = () => {
     if (filters.is4x4 && !car.is4x4) return false;
 
     // Filtre par prix
-    if (car.pricePerDay < filters.priceRange[0] || car.pricePerDay > filters.priceRange[1]) {
+    const carPrice = parseFloat(car.pricePerDay);
+    if (carPrice < filters.priceRange[0] || carPrice > filters.priceRange[1]) {
       return false;
     }
 
@@ -190,6 +231,38 @@ const SearchResults = () => {
                   <option value="5">{t('searchResults.filters.seats.options.5')}</option>
                   <option value="7">{t('searchResults.filters.seats.options.7')}</option>
                 </select>
+              </div>
+
+              {/* Destination */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('searchResults.filters.destination.label')}
+                </label>
+                <select 
+                  name="destination"
+                  value={filters.destination}
+                  onChange={handleFilterChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                >
+                  <option value="">{t('searchResults.filters.destination.all')}</option>
+                  <option value="Douala">Douala</option>
+                  <option value="Yaoundé">Yaoundé</option>
+                  <option value="Bafoussam">Bafoussam</option>
+                  <option value="Bamenda">Bamenda</option>
+                  <option value="Bertoua">Bertoua</option>
+                  <option value="Buea">Buea</option>
+                  <option value="Kribi">Kribi</option>
+                  <option value="Limbé">Limbé</option>
+                  <option value="Ebolowa">Ebolowa</option>
+                  <option value="Edéa">Edéa</option>
+                  <option value="Kumba">Kumba</option>
+                  <option value="Foumban">Foumban</option>
+                </select>
+                {filters.destination && !['Kribi', 'Douala', 'Edéa', 'Yaoundé'].includes(filters.destination) && (
+                  <p className="text-sm text-blue-600 mt-2">
+                    {t('searchResults.filters.destination.4x4Requirement')}
+                  </p>
+                )}
               </div>
 
               {/* Options supplémentaires */}
@@ -294,6 +367,38 @@ const SearchResults = () => {
                         <option value="5">{t('searchResults.filters.seats.options.5')}</option>
                         <option value="7">{t('searchResults.filters.seats.options.7')}</option>
                       </select>
+                    </div>
+
+                    {/* Destination */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('searchResults.filters.destination.label')}
+                      </label>
+                      <select 
+                        name="destination"
+                        value={filters.destination}
+                        onChange={handleFilterChange}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                      >
+                        <option value="">{t('searchResults.filters.destination.all')}</option>
+                        <option value="Douala">Douala</option>
+                        <option value="Yaoundé">Yaoundé</option>
+                        <option value="Bafoussam">Bafoussam</option>
+                        <option value="Bamenda">Bamenda</option>
+                        <option value="Bertoua">Bertoua</option>
+                        <option value="Buea">Buea</option>
+                        <option value="Kribi">Kribi</option>
+                        <option value="Limbé">Limbé</option>
+                        <option value="Ebolowa">Ebolowa</option>
+                        <option value="Edéa">Edéa</option>
+                        <option value="Kumba">Kumba</option>
+                        <option value="Foumban">Foumban</option>
+                      </select>
+                      {filters.destination && !['Kribi', 'Douala', 'Edéa', 'Yaoundé'].includes(filters.destination) && (
+                        <p className="text-sm text-blue-600 mt-2">
+                          {t('searchResults.filters.destination.4x4Requirement')}
+                        </p>
+                      )}
                     </div>
 
                     {/* Options supplémentaires */}
