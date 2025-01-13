@@ -80,6 +80,15 @@ const SearchResults = () => {
     }));
   };
 
+  const handleDestinationChange = (destination) => {
+    setFilters(prev => ({
+      ...prev,
+      destination: destination
+    }));
+    // Sauvegarder la destination dans le localStorage
+    localStorage.setItem('searchDestination', destination);
+  };
+
   const filteredCars = cars.filter(car => {
     // Filtre par type de voiture
     if (filters.carType) {
@@ -241,7 +250,7 @@ const SearchResults = () => {
                 <select 
                   name="destination"
                   value={filters.destination}
-                  onChange={handleFilterChange}
+                  onChange={(e) => handleDestinationChange(e.target.value)}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">{t('searchResults.filters.destination.all')}</option>
@@ -377,7 +386,7 @@ const SearchResults = () => {
                       <select 
                         name="destination"
                         value={filters.destination}
-                        onChange={handleFilterChange}
+                        onChange={(e) => handleDestinationChange(e.target.value)}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                       >
                         <option value="">{t('searchResults.filters.destination.all')}</option>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   FaCalendarAlt, 
   FaMapMarkerAlt, 
@@ -32,6 +32,36 @@ const BookingForm = ({
   isSubmitting
 }) => {
   const { t, i18n } = useTranslation();
+
+  // Extraire uniquement les noms des villes
+  const cameroonCityNames = cameroonCities.map(city => city.name)
+    .filter(city => !['Maroua', 'Ngaoundéré', 'Garoua'].includes(city));
+
+  // Vérifier si la voiture est un 4x4
+  const is4x4 = car?.is4x4 || false;
+
+  console.log('Car details:', {
+    is4x4: is4x4
+  });
+
+  // Villes autorisées en fonction du type de voiture
+  const allowedDestinations = is4x4 
+    ? cameroonCityNames
+    : ["Douala", "Kribi", "Edéa"];
+
+  console.log('Allowed destinations:', allowedDestinations);
+
+  // Si la destination actuelle n'est pas autorisée, réinitialiser la destination
+  useEffect(() => {
+    if (bookingForm.destination && !allowedDestinations.includes(bookingForm.destination)) {
+      handleInputChange({
+        target: {
+          name: 'destination',
+          value: ''
+        }
+      });
+    }
+  }, [car, bookingForm.destination]);
 
   // Function to get mobile money icon color
   const getMobileMoneyIconColor = () => {
@@ -170,6 +200,34 @@ const BookingForm = ({
           />
         </div>
 
+        <div className="mb-4">
+          <label className="block text-sm text-gray-600 mb-1">
+            {t('bookingForm.destination')}
+          </label>
+          <select
+            name="destination"
+            value={bookingForm.destination || ''}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          >
+            <option value="">{t('bookingForm.selectDestination')}</option>
+            {allowedDestinations.map((destination, index) => (
+              <option 
+                key={index} 
+                value={destination}
+              >
+                {destination}
+              </option>
+            ))}
+          </select>
+          {!is4x4 && (
+            <p className="text-sm text-yellow-600 mt-2">
+              {t('bookingForm.destination4x4Requirement')}
+            </p>
+          )}
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">
@@ -212,12 +270,10 @@ const BookingForm = ({
           {/* Mobile Money Option */}
           <label 
             htmlFor="mobile" 
-            className={`
-              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+            className={`flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
               ${paymentMethod === 'mobile' 
                 ? 'bg-yellow-50 border-yellow-500 text-yellow-700' 
-                : 'bg-white border-gray-200 text-gray-600 hover:border-yellow-300'}
-            `}
+                : 'bg-white border-gray-200 text-gray-600 hover:border-yellow-300'}`}
           >
             <input
               type="radio"
@@ -237,12 +293,10 @@ const BookingForm = ({
           {/* Credit Card Option */}
           <label 
             htmlFor="creditCard" 
-            className={`
-              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+            className={`flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
               ${paymentMethod === 'creditCard' 
                 ? 'bg-blue-50 border-blue-500 text-blue-700' 
-                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-300'}
-            `}
+                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-300'}`}
           >
             <input
               type="radio"
@@ -262,12 +316,10 @@ const BookingForm = ({
           {/* Cash Option */}
           <label 
             htmlFor="cash" 
-            className={`
-              flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
+            className={`flex flex-col items-center justify-center p-6 rounded-lg border-2 cursor-pointer transition-all duration-300
               ${paymentMethod === 'cash' 
                 ? 'bg-green-50 border-green-500 text-green-700' 
-                : 'bg-white border-gray-200 text-gray-600 hover:border-green-300'}
-            `}
+                : 'bg-white border-gray-200 text-gray-600 hover:border-green-300'}`}
           >
             <input
               type="radio"

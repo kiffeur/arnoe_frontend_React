@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   ChevronLeftIcon, 
@@ -41,11 +41,54 @@ const carTypes = [
 const Hero = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [dropoffLocation, setDropoffLocation] = useState('');
-  const [pickupDate, setPickupDate] = useState(null);
-  const [dropoffDate, setDropoffDate] = useState(null);
-  const [carType, setCarType] = useState('');
+  
+  // Charger les données du localStorage au chargement initial
+  const [pickupLocation, setPickupLocation] = useState(() => 
+    localStorage.getItem('pickupLocation') || ''
+  );
+  const [dropoffLocation, setDropoffLocation] = useState(() => 
+    localStorage.getItem('dropoffLocation') || ''
+  );
+  const [pickupDate, setPickupDate] = useState(() => {
+    const savedDate = localStorage.getItem('pickupDate');
+    return savedDate ? new Date(savedDate) : null;
+  });
+  const [dropoffDate, setDropoffDate] = useState(() => {
+    const savedDate = localStorage.getItem('dropoffDate');
+    return savedDate ? new Date(savedDate) : null;
+  });
+  const [carType, setCarType] = useState(() => 
+    localStorage.getItem('carType') || ''
+  );
+
+  // Sauvegarder dans localStorage à chaque changement
+  useEffect(() => {
+    localStorage.setItem('pickupLocation', pickupLocation);
+  }, [pickupLocation]);
+
+  useEffect(() => {
+    localStorage.setItem('dropoffLocation', dropoffLocation);
+  }, [dropoffLocation]);
+
+  useEffect(() => {
+    if (pickupDate) {
+      localStorage.setItem('pickupDate', pickupDate.toISOString());
+    } else {
+      localStorage.removeItem('pickupDate');
+    }
+  }, [pickupDate]);
+
+  useEffect(() => {
+    if (dropoffDate) {
+      localStorage.setItem('dropoffDate', dropoffDate.toISOString());
+    } else {
+      localStorage.removeItem('dropoffDate');
+    }
+  }, [dropoffDate]);
+
+  useEffect(() => {
+    localStorage.setItem('carType', carType);
+  }, [carType]);
 
   const handleSearch = (e) => {
     e.preventDefault();

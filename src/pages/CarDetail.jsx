@@ -39,7 +39,8 @@ const CarDetail = () => {
     dropoffDate: '',
     pickupQuarter: '',
     pickupCity: 'Douala',
-    dropoffCity: 'Douala'
+    dropoffCity: 'Douala',
+    destination: localStorage.getItem('searchDestination') || ''
   });
   const [totalPrice, setTotalPrice] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
