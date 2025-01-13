@@ -55,14 +55,14 @@ const SearchResults = () => {
     'Limbé', 
     'Ebolowa', 
     'Kumba', 
-    'Foumban'
+    'Foumban',
+    'Yaoundé'
   ];
 
   const flexDestinations = [
     'Douala', 
     'Kribi', 
-    'Edéa', 
-    'Yaoundé'
+    'Edéa'
   ];
 
   const handleDestinationChange = (destination) => {
@@ -70,7 +70,7 @@ const SearchResults = () => {
       ...prevFilters, 
       destination,
       // Réinitialiser is4x4 uniquement si la destination nécessite un 4x4
-      is4x4: require4x4Destinations.includes(destination) ? true : prevFilters.is4x4
+      is4x4: require4x4Destinations.includes(destination) ? true : false
     }));
     localStorage.setItem('searchDestination', destination);
   };
@@ -248,26 +248,23 @@ const SearchResults = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {t('searchResults.filters.destination.label')}
                 </label>
-                <select 
-                  name="destination"
-                  value={filters.destination}
+                <select
+                  value={filters.destination || ''}
                   onChange={(e) => handleDestinationChange(e.target.value)}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">{t('searchResults.filters.destination.all')}</option>
-                  {cameroonCityNames.map((destination, index) => (
+                  {[...flexDestinations, ...require4x4Destinations].map((destination, index) => (
                     <option 
                       key={index} 
                       value={destination}
-                      disabled={isDestinationDisabled()}
                     >
                       {destination}
                     </option>
                   ))}
                 </select>
                 {filters.destination && 
-                  require4x4Destinations.includes(filters.destination) && 
-                  !filters.is4x4 && (
+                  require4x4Destinations.includes(filters.destination) && (
                   <p className="text-sm text-yellow-600 mt-2">
                     {t('searchResults.filters.destination.requirement4x4')}
                   </p>
@@ -385,24 +382,22 @@ const SearchResults = () => {
                       </label>
                       <select 
                         name="destination"
-                        value={filters.destination}
+                        value={filters.destination || ''}
                         onChange={(e) => handleDestinationChange(e.target.value)}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
                       >
                         <option value="">{t('searchResults.filters.destination.all')}</option>
-                        {cameroonCityNames.map((destination, index) => (
+                        {[...flexDestinations, ...require4x4Destinations].map((destination, index) => (
                           <option 
                             key={index} 
                             value={destination}
-                            disabled={isDestinationDisabled()}
                           >
                             {destination}
                           </option>
                         ))}
                       </select>
                       {filters.destination && 
-                        require4x4Destinations.includes(filters.destination) && 
-                        !filters.is4x4 && (
+                        require4x4Destinations.includes(filters.destination) && (
                         <p className="text-sm text-yellow-600 mt-2">
                           {t('searchResults.filters.destination.requirement4x4')}
                         </p>

@@ -29,7 +29,8 @@ const BookingForm = ({
   setMobileOperator,
   totalPrice,
   setShowTerms,
-  isSubmitting
+  isSubmitting,
+  selectedDestination // Nouvelle prop pour la destination
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -44,12 +45,24 @@ const BookingForm = ({
     is4x4: is4x4
   });
 
-  // Villes autorisées en fonction du type de voiture
+  // Villes autorisées en fonction du type de voiture et de la destination sélectionnée
   const allowedDestinations = is4x4 
     ? cameroonCityNames
     : ["Douala", "Kribi", "Edéa"];
 
   console.log('Allowed destinations:', allowedDestinations);
+
+  // Utiliser la destination sélectionnée si elle est valide
+  useEffect(() => {
+    if (selectedDestination && allowedDestinations.includes(selectedDestination)) {
+      handleInputChange({
+        target: { 
+          name: 'destination', 
+          value: selectedDestination 
+        }
+      });
+    }
+  }, [selectedDestination, is4x4]);
 
   // Si la destination actuelle n'est pas autorisée, réinitialiser la destination
   useEffect(() => {
@@ -221,10 +234,9 @@ const BookingForm = ({
               </option>
             ))}
           </select>
-          {!is4x4 && allowedDestinations.some(dest => 
+          {bookingForm.destination && 
             ['Bafoussam', 'Bamenda', 'Bertoua', 'Buea', 'Limbé', 'Ebolowa', 'Kumba', 'Foumban']
-              .includes(dest)
-          ) && (
+              .includes(bookingForm.destination) && (
             <p className="text-sm text-yellow-600 mt-2">
               {t('bookingForm.destination4x4Requirement')}
             </p>
