@@ -30,7 +30,8 @@ const BookingForm = ({
   totalPrice,
   setShowTerms,
   isSubmitting,
-  selectedDestination // Nouvelle prop pour la destination
+  selectedDestination, // Nouvelle prop pour la destination
+  preSelectedDestination // Nouvelle prop pour la destination pré-sélectionnée
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -52,6 +53,20 @@ const BookingForm = ({
 
   console.log('Allowed destinations:', allowedDestinations);
 
+  // Récupérer la destination sélectionnée depuis localStorage
+  useEffect(() => {
+    const storedDestination = localStorage.getItem('selectedDestination');
+    
+    if (storedDestination && allowedDestinations.includes(storedDestination)) {
+      handleInputChange({
+        target: { 
+          name: 'destination', 
+          value: storedDestination 
+        }
+      });
+    }
+  }, []);
+
   // Utiliser la destination sélectionnée si elle est valide
   useEffect(() => {
     if (selectedDestination && allowedDestinations.includes(selectedDestination)) {
@@ -63,6 +78,18 @@ const BookingForm = ({
       });
     }
   }, [selectedDestination, is4x4]);
+
+  // Utiliser la destination pré-sélectionnée si elle existe
+  useEffect(() => {
+    if (preSelectedDestination) {
+      handleInputChange({
+        target: { 
+          name: 'destination', 
+          value: preSelectedDestination 
+        }
+      });
+    }
+  }, [preSelectedDestination]);
 
   // Si la destination actuelle n'est pas autorisée, réinitialiser la destination
   useEffect(() => {

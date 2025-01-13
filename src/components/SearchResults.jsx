@@ -72,6 +72,8 @@ const SearchResults = () => {
       // Réinitialiser is4x4 uniquement si la destination nécessite un 4x4
       is4x4: require4x4Destinations.includes(destination) ? true : false
     }));
+    // Stocker la destination sélectionnée dans localStorage
+    localStorage.setItem('selectedDestination', destination);
     localStorage.setItem('searchDestination', destination);
   };
 
