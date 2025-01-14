@@ -146,7 +146,30 @@
       "touchScreen": "Écran tactile",
       "seats": "places",
       "yes": "Oui",
-      "no": "Non"
+      "no": "Non",
+      "details": {
+        "airConditioning": "Climatisation",
+        "backupCamera": "Caméra de recul",
+        "touchScreen": "Écran tactile",
+        "bluetooth": "Bluetooth",
+        "usbPort": "Port USB",
+        "gps": "GPS",
+        "parkingSensors": "Capteurs de stationnement"
+      }
+    },
+    "mobileMoney": {
+      "title": "Paiement Mobile",
+      "description": "Payez facilement avec votre opérateur mobile"
+    },
+    "internationalPayment": {
+      "title": "Paiement Hors du Cameroun",
+      "description": "Options de paiement internationales disponibles"
+    },
+    "termsModal": {
+      "title": "Conditions d'Utilisation",
+      "accept": "J'accepte les conditions",
+      "decline": "Refuser",
+      "fullTerms": "Lire les conditions complètes"
     },
     "similarCars": "Voitures Similaires",
     "bookNow": "Réserver maintenant",
@@ -168,6 +191,13 @@
       "suv": "Un SUV spacieux et polyvalent, idéal pour les familles et les groupes. Parfait pour les routes urbaines comme pour les terrains plus difficiles.",
       "pickup": "Un pickup robuste et fiable, adapté aux terrains difficiles et au transport de charges lourdes. Parfait pour les professionnels et les aventuriers.",
       "premium": "Une voiture haut de gamme alliant luxe et performance. Équipée des dernières technologies pour une expérience de conduite exceptionnelle."
+    },
+    "mobileMoney": "Paiement Mobile ({{operator}})",
+    "creditCard": "Virement bancaire",
+    "bankTransfer": "Virement bancaire",
+    "internationalPayment": {
+      "westernUnion": "Western Union",
+      "taptapSend": "TAPTAP Send"
     }
   },
   "bookingForm": {
@@ -300,7 +330,7 @@
         "all": "Toutes les places",
         "options": {
           "2": "2 places",
-          "4": "4 places", 
+          "4": "4 places",
           "5": "5 places",
           "7": "7 places"
         }

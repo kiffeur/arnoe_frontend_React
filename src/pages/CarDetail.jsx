@@ -152,18 +152,26 @@ const CarDetail = () => {
         ...bookingForm,
         paymentMethod: paymentMethod === 'mobile' 
           ? `mobile_${mobileOperator}` 
+          : paymentMethod === 'creditCard'
+          ? 'credit_card'
+          : paymentMethod === 'international' 
+          ? mobileOperator === 'western_union' ? 'western_union' : 'taptap_send'
           : 'bank_transfer',
         carId: parseInt(car.id),
         startDate: new Date(bookingForm.pickupDate).toISOString(),
         endDate: new Date(bookingForm.dropoffDate).toISOString(),
         userId: 1,
         address: bookingForm.pickupQuarter,
-        totalPrice: calculatedTotalPrice // Utilisation du prix calculé
+        totalPrice: calculatedTotalPrice
       });
 
       console.log('Booking Details:', {
         paymentMethod: paymentMethod === 'mobile' 
           ? `mobile_${mobileOperator}` 
+          : paymentMethod === 'creditCard'
+          ? 'credit_card'
+          : paymentMethod === 'international' 
+          ? mobileOperator === 'western_union' ? 'western_union' : 'taptap_send'
           : 'bank_transfer',
         carId: parseInt(car.id),
         startDate: new Date(bookingForm.pickupDate).toISOString(),
@@ -186,7 +194,10 @@ const CarDetail = () => {
             paymentMethod,
             paymentDetails: paymentMethod === 'mobile' ? 
               `Mobile Money (${mobileOperator === 'orange' ? 'Orange Money' : 'MTN Mobile Money'})` : 
-              t('carDetail.bankTransfer'),
+              paymentMethod === 'creditCard' ? 'Carte de crédit' : 
+              paymentMethod === 'international' ? 
+                mobileOperator === 'western_union' ? 'Western Union' : 'Taptap Send' : 
+                t('carDetail.bankTransfer'),
             bookingReference: response.id || 'REF-' + Date.now()
           } 
         } 
