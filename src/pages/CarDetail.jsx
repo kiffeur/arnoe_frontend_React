@@ -205,12 +205,33 @@ const CarDetail = () => {
 
       toast.success(t('carDetail.success.booking'));
     } catch (error) {
-      console.error('Booking error:', error);
-      toast.error(
-        error.message === 'La voiture n\'est pas disponible pour les dates sélectionnées' 
-          ? t('carDetail.errors.carNotAvailable') 
-          : t('carDetail.errors.bookingError')
-      );
+      setIsSubmitting(false);
+      console.error('Booking submission error:', error);
+      
+      // Message d'erreur personnalisé
+      const errorMessage = error.message || 'Une erreur est survenue lors de la réservation';
+      
+      // Affichage du toast avec message détaillé
+      toast.warn(`${errorMessage}`, {
+        position: "top-right",
+        autoClose: 5000,
+        style: {
+          backgroundColor: '#D35400',  // Un orange plus foncé (type Pumpkin)
+          color: 'white'
+        },
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
+      // Log détaillé de l'erreur
+      console.log('Détails complets de l\'erreur :', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
     } finally {
       setIsSubmitting(false);
     }
