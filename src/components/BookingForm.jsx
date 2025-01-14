@@ -273,7 +273,7 @@ const BookingForm = ({
               </option>
             ))}
           </select>
-          {bookingForm.destination && 
+          {false && bookingForm.destination && 
             ['Bafoussam', 'Bamenda', 'Bertoua', 'Buea', 'Limbé', 'Ebolowa', 'Kumba', 'Foumban']
               .includes(bookingForm.destination) && (
             <p className="text-sm text-yellow-600 mt-2">

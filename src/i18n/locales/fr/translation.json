@@ -166,7 +166,7 @@
       "description": "Options de paiement internationales disponibles"
     },
     "termsModal": {
-      "title": "Conditions d'Utilisation",
+      "title": "Conditions d'Utilisations",
       "accept": "J'accepte les conditions",
       "decline": "Refuser",
       "fullTerms": "Lire les conditions complètes"
@@ -213,7 +213,6 @@
     "phonePlaceholder": "Votre numéro de téléphone",
     "destination": "Destination",
     "selectDestination": "Sélectionnez une destination",
-    "destination4x4Requirement": "Seules les voitures 4x4 peuvent accéder à cette destination",
     "bookingDetails": "Détails de la réservation",
     "departureCity": "Ville de départ",
     "returnCity": "Ville de retour",
@@ -323,7 +322,8 @@
           "berline": "Berline",
           "suv5": "SUV 5 places",
           "suv7": "SUV 7 places",
-          "pickup": "Pickup"
+          "pickup": "Pickup",
+          "premium": "Premium"
         }
       },
       "seats": {

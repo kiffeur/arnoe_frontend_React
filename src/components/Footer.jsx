@@ -100,7 +100,6 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <FaPhoneVolume className="text-[#FF4D30] mt-1" />
                 <div>
-                  <p className="hover:text-[#FF4D30] transition-colors">+237 699597698</p>
                   <p className="hover:text-[#FF4D30] transition-colors">+237 699543001</p>
                 </div>
               </li>

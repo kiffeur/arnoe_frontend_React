@@ -46,7 +46,7 @@ const CarTypes = () => {
     },
     { 
       id: 4, 
-      name: t('carTypes.premium.name'), 
+      name: 'Premium', 
       icon: FaGem,
       description: t('carTypes.premium.description'),
       filterType: 'premium',
