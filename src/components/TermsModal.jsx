@@ -22,7 +22,7 @@ const TermsModal = ({ isOpen, onClose }) => {
           className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[80vh] overflow-hidden relative my-4"
         >
           <div className="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white z-10">
-            <h2 className="text-2xl font-bold text-gray-800">Conditions d'Utilisation</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Conditions d'Utilisations</h2>
             <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 transition-colors"
