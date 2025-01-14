@@ -298,36 +298,71 @@ const AdminBookings = () => {
             </span>
           </h1>
           
-          <div className="flex space-x-3">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                filter === 'all'
-                ? 'bg-blue-500 text-white'
-                : 'bg-white text-gray-600 hover:bg-gray-50'
+          <div className="flex space-x-4 mb-6 bg-gray-100 p-2 rounded-xl shadow-inner">
+            <button 
+              onClick={() => setFilter('all')} 
+              className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                filter === 'all' 
+                  ? 'bg-[#FF4D30] text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-200'
               }`}
             >
-              Toutes
+              <span className="flex items-center justify-center space-x-3">
+                <FaCar className="w-6 h-6" />
+                <span className="font-medium">Toutes</span>
+              </span>
             </button>
-            <button
-              onClick={() => setFilter('pending')}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                filter === 'pending'
-                ? 'bg-amber-500 text-white'
-                : 'bg-white text-gray-600 hover:bg-gray-50'
+            <button 
+              onClick={() => setFilter('pending')} 
+              className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                filter === 'pending' 
+                  ? 'bg-amber-500 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-200'
               }`}
             >
-              En attente
+              <span className="flex items-center justify-center space-x-3">
+                <FaClock className="w-6 h-6" />
+                <span className="font-medium">En attente</span>
+              </span>
             </button>
-            <button
-              onClick={() => setFilter('active')}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                filter === 'active'
-                ? 'bg-emerald-500 text-white'
-                : 'bg-white text-gray-600 hover:bg-gray-50'
+            <button 
+              onClick={() => setFilter('active')} 
+              className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                filter === 'active' 
+                  ? 'bg-emerald-500 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-200'
               }`}
             >
-              Actives
+              <span className="flex items-center justify-center space-x-3">
+                <FaCheck className="w-6 h-6" />
+                <span className="font-medium">Actives</span>
+              </span>
+            </button>
+            <button 
+              onClick={() => setFilter('cancelled')} 
+              className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                filter === 'cancelled' 
+                  ? 'bg-rose-500 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <span className="flex items-center justify-center space-x-3">
+                <FaTimes className="w-6 h-6" />
+                <span className="font-medium">Annulées</span>
+              </span>
+            </button>
+            <button 
+              onClick={() => setFilter('completed')} 
+              className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                filter === 'completed' 
+                  ? 'bg-blue-500 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <span className="flex items-center justify-center space-x-3">
+                <FaCalendarAlt className="w-6 h-6" />
+                <span className="font-medium">Terminées</span>
+              </span>
             </button>
           </div>
         </motion.div>
