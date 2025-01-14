@@ -109,15 +109,9 @@ const Footer = () => {
                 <div>
                   <p 
                     className="cursor-pointer hover:text-[#FF4D30] transition-colors"
-                    onClick={() => handleWhatsAppClick('237699597698')}
+                    onClick={() => handleWhatsAppClick('237689352854')}
                   >
-                    +237 699597698
-                  </p>
-                  <p 
-                    className="cursor-pointer hover:text-[#FF4D30] transition-colors"
-                    onClick={() => handleWhatsAppClick('237699543001')}
-                  >
-                    +237 699543001
+                    +237 689 35 28 54
                   </p>
                 </div>
               </li>
