@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 import { FaCheck, FaTimes, FaClock, FaEye, FaCalendarAlt, FaCar, FaUser, FaEnvelope, FaPhone, FaMoneyBillWave } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from '../components/Sidebar';
-import { getAllBookings, updateBookingStatus } from '../services/bookingService';
-import { format, differenceInDays, locale } from 'date-fns';
+import { getAllBookings, updateBookingStatus, cancelBooking, validateBooking } from '../services/bookingService';
+import { format, differenceInDays } from 'date-fns';
 import { fr } from 'date-fns/locale';
-
-locale('fr');
 
 const AdminBookings = () => {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   const fetchBookings = async () => {
     try {
@@ -42,6 +41,31 @@ const AdminBookings = () => {
       }
     } catch (error) {
       console.error('Erreur lors de la mise à jour du statut:', error);
+    }
+  };
+
+  const handleCancelBooking = async (bookingId) => {
+    try {
+      await cancelBooking(bookingId);
+      toast.success('La réservation a été annulée avec succès');
+      await fetchBookings();
+    } catch (error) {
+      toast.error('Erreur lors de l\'annulation de la réservation');
+      console.error(error);
+    }
+  };
+
+  const handleValidateBooking = async (bookingId) => {
+    try {
+      await validateBooking(bookingId);
+      toast.success('La réservation a été validée avec succès');
+      await fetchBookings();
+      if (selectedBooking?.id === bookingId) {
+        setSelectedBooking(null);
+      }
+    } catch (error) {
+      toast.error('Erreur lors de la validation de la réservation');
+      console.error(error);
     }
   };
 
@@ -232,16 +256,16 @@ const AdminBookings = () => {
 
               {/* Actions */}
               {booking.status === 'pending' && (
-                <div className="flex space-x-3 mt-6">
+                <div className="flex space-x-4 mt-4">
                   <button
-                    onClick={() => handleStatusUpdate(booking.id, 'active')}
+                    onClick={() => handleValidateBooking(booking.id)}
                     className="flex-1 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center justify-center space-x-2"
                   >
                     <FaCheck className="w-4 h-4" />
                     <span>Confirmer</span>
                   </button>
                   <button
-                    onClick={() => handleStatusUpdate(booking.id, 'cancelled')}
+                    onClick={() => handleCancelBooking(booking.id)}
                     className="flex-1 bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 transition-colors flex items-center justify-center space-x-2"
                   >
                     <FaTimes className="w-4 h-4" />
@@ -258,6 +282,7 @@ const AdminBookings = () => {
 
   return (
     <div className="flex bg-gray-50 min-h-screen">
+      <Toaster />
       <Sidebar />
       
       <div className="flex-1 ml-64 p-8">

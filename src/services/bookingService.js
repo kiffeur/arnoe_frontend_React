@@ -10,12 +10,18 @@ export const createBooking = async (bookingData) => {
       body: JSON.stringify(bookingData),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Une erreur est survenue lors de la réservation');
+    const responseData = await response.json();
+
+    if (response.status === 400) {
+      // Cas spécifique pour la non-disponibilité de la voiture
+      throw new Error(responseData.message || 'La voiture n\'est pas disponible pour les dates sélectionnées');
     }
 
-    return await response.json();
+    if (!response.ok) {
+      throw new Error(responseData.message || 'Une erreur est survenue lors de la réservation');
+    }
+
+    return responseData;
   } catch (error) {
     console.error('Booking error:', error);
     throw error;
@@ -30,11 +36,13 @@ export const getAllBookings = async () => {
       },
     });
 
+    const responseData = await response.json();
+
     if (!response.ok) {
       throw new Error('Erreur lors du chargement des réservations');
     }
 
-    return await response.json();
+    return responseData;
   } catch (error) {
     console.error('Error fetching bookings:', error);
     throw error;
@@ -52,13 +60,71 @@ export const updateBookingStatus = async (bookingId, status) => {
       body: JSON.stringify({ status }),
     });
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      throw new Error('Erreur lors de la mise à jour du statut');
+      throw new Error(responseData.message || 'Erreur lors de la mise à jour du statut');
     }
 
-    return await response.json();
+    return responseData;
   } catch (error) {
     console.error('Error updating booking status:', error);
+    throw error;
+  }
+};
+
+export const cancelBooking = async (bookingId) => {
+  try {
+    const response = await fetch(`${API_URL}/bookings/${bookingId}/cancel`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ bookingId: Number(bookingId) }),
+    });
+
+    const responseData = await response.json();
+
+    if (response.status === 400) {
+      throw new Error(responseData.message || 'Erreur de requête : Vérifiez les informations saisies');
+    }
+
+    if (!response.ok) {
+      throw new Error(responseData.message || 'Une erreur est survenue lors de l\'annulation de la réservation');
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error('Booking cancellation error:', error);
+    throw error;
+  }
+};
+
+export const validateBooking = async (bookingId) => {
+  try {
+    const response = await fetch(`${API_URL}/bookings/${bookingId}/validate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ bookingId: Number(bookingId) }),
+    });
+
+    const responseData = await response.json();
+
+    if (response.status === 400) {
+      throw new Error(responseData.message || 'Erreur de requête : Vérifiez les informations saisies');
+    }
+
+    if (!response.ok) {
+      throw new Error(responseData.message || 'Une erreur est survenue lors de la validation de la réservation');
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error('Booking validation error:', error);
     throw error;
   }
 };

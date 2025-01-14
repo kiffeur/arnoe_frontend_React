@@ -206,7 +206,11 @@ const CarDetail = () => {
       toast.success(t('carDetail.success.booking'));
     } catch (error) {
       console.error('Booking error:', error);
-      toast.error(t('carDetail.errors.bookingError'));
+      toast.error(
+        error.message === 'La voiture n\'est pas disponible pour les dates sélectionnées' 
+          ? t('carDetail.errors.carNotAvailable') 
+          : t('carDetail.errors.bookingError')
+      );
     } finally {
       setIsSubmitting(false);
     }

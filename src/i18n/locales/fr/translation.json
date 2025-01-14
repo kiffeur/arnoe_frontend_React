@@ -181,6 +181,7 @@
       "selectPayment": "Veuillez sélectionner une méthode de paiement",
       "selectOperator": "Veuillez sélectionner un opérateur mobile",
       "bookingError": "Une erreur est survenue lors de la réservation",
+      "carNotAvailable": "La voiture n'est pas disponible pour les dates sélectionnées",
       "loadingError": "Erreur lors du chargement de la voiture"
     },
     "success": {
