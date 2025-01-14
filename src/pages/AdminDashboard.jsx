@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import Sidebar from '../components/Sidebar';
 import { getAllCars } from '../services/api';
 import { getAllBookings } from '../services/bookingService';
+import { format, differenceInDays } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 const StatCard = ({ title, value, icon: Icon, color, delay }) => (
   <motion.div
@@ -92,6 +94,18 @@ const AdminDashboard = () => {
     }
   };
 
+  const formatPaymentMethod = (method) => {
+    switch(method) {
+      case 'mobile_mtn': return 'Mobile Money MTN';
+      case 'mobile_orange': return 'Mobile Money Orange';
+      case 'credit_card': return 'Carte de Crédit';
+      case 'western_union': return 'Western Union';
+      case 'taptap_send': return 'TAPTAP Send';
+      case 'bank_transfer': return 'Virement Bancaire';
+      default: return method || 'Non spécifié';
+    }
+  };
+
   return (
     <div className="flex bg-gray-50 min-h-screen">
       <Sidebar />
@@ -175,6 +189,7 @@ const AdminDashboard = () => {
                   <th className="pb-3 font-semibold text-gray-600">Client</th>
                   <th className="pb-3 font-semibold text-gray-600">Voiture</th>
                   <th className="pb-3 font-semibold text-gray-600">Date</th>
+                  <th className="pb-3 font-semibold text-gray-600">Durée</th>
                   <th className="pb-3 font-semibold text-gray-600">Statut</th>
                 </tr>
               </thead>
@@ -214,11 +229,16 @@ const AdminDashboard = () => {
                     </td>
                     <td className="py-3">
                       <div className="text-gray-800">
-                        {new Date(booking.startDate).toLocaleDateString('fr-FR', {
-                          day: 'numeric',
-                          month: 'short',
-                          year: 'numeric'
-                        })}
+                        <span className="text-blue-600 mr-1">📅</span>
+                        {format(new Date(booking.startDate), 'dd MMMM yyyy', { locale: fr })} 
+                        <span className="mx-1 text-gray-400">→</span> 
+                        {format(new Date(booking.endDate), 'dd MMMM yyyy', { locale: fr })}
+                      </div>
+                    </td>
+                    <td className="py-3">
+                      <div className="text-gray-600 text-sm flex items-center">
+                        <span className="mr-1">⏱️</span>
+                        {differenceInDays(new Date(booking.endDate), new Date(booking.startDate))} jour(s)
                       </div>
                     </td>
                     <td className="py-3">

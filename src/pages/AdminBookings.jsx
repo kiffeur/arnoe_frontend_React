@@ -4,8 +4,10 @@ import { FaCheck, FaTimes, FaClock, FaEye, FaCalendarAlt, FaCar, FaUser, FaEnvel
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from '../components/Sidebar';
 import { getAllBookings, updateBookingStatus } from '../services/bookingService';
-import { format, differenceInDays } from 'date-fns';
+import { format, differenceInDays, locale } from 'date-fns';
 import { fr } from 'date-fns/locale';
+
+locale('fr');
 
 const AdminBookings = () => {
   const navigate = useNavigate();
@@ -69,19 +71,14 @@ const AdminBookings = () => {
   };
 
   const formatPaymentMethod = (method) => {
-    switch (method) {
-      case 'credit_card':
-        return 'Virement bancaire';
-      case 'mobile_orange':
-        return 'Orange Money';
-      case 'mobile_mtn':
-        return 'MTN Money';
-      case 'taptap_send':
-        return 'TAPTAP Send';
-      case 'western_union':
-        return 'Western Union';
-      default:
-        return method || 'Non spécifié';
+    switch(method) {
+      case 'mobile_mtn': return 'Mobile Money MTN';
+      case 'mobile_orange': return 'Mobile Money Orange';
+      case 'credit_card': return 'Carte de Crédit';
+      case 'western_union': return 'Western Union';
+      case 'taptap_send': return 'TAPTAP Send';
+      case 'bank_transfer': return 'Virement Bancaire';
+      default: return method || 'Non spécifié';
     }
   };
 
@@ -221,13 +218,13 @@ const AdminBookings = () => {
                   <div>
                     <div className="text-gray-600 mb-1">Date de début:</div>
                     <div className="font-medium">
-                      {format(new Date(booking.startDate), 'PPP', { locale: fr })}
+                      {format(new Date(booking.startDate), 'PPP')}
                     </div>
                   </div>
                   <div>
                     <div className="text-gray-600 mb-1">Date de fin:</div>
                     <div className="font-medium">
-                      {format(new Date(booking.endDate), 'PPP', { locale: fr })}
+                      {format(new Date(booking.endDate), 'PPP')}
                     </div>
                   </div>
                 </div>
@@ -328,6 +325,7 @@ const AdminBookings = () => {
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Client</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Voiture</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Statut</th>
+                    <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">Dates</th>
                     <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
                   </tr>
                 </thead>
@@ -380,6 +378,20 @@ const AdminBookings = () => {
                           {getStatusIcon(booking.status)}
                           <span className="ml-2">{booking.status}</span>
                         </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-gray-600">
+                          <div className="font-medium">
+                            <span className="text-blue-600 mr-1">📅</span>
+                            {format(new Date(booking.startDate), 'dd MMMM yyyy')} 
+                            <span className="mx-1 text-gray-400">→</span> 
+                            {format(new Date(booking.endDate), 'dd MMMM yyyy')}
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1 flex items-center">
+                            <span className="mr-1">⏱️</span>
+                            {differenceInDays(new Date(booking.endDate), new Date(booking.startDate))} jour(s)
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button
