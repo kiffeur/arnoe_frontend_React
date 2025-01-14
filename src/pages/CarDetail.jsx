@@ -284,15 +284,19 @@ const CarDetail = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="relative">
           {/* Hero Section with gradient */}
-          <div className="bg-gradient-to-r from-blue-800 to-blue-600 p-8">
-            <div className="flex items-center gap-2 text-white mb-2">
-              <FaStar className="text-yellow-400" />
-              <span className="text-sm">4.8</span>
-              <span className="text-sm text-white/80">(288)</span>
+          <div className="bg-gradient-to-r from-blue-800 to-blue-600 p-8 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+              <div className="flex items-center gap-2 text-white mb-2">
+                <FaStar className="text-yellow-400" />
+                <span className="text-sm">4.8</span>
+                <span className="text-sm text-white/80">(288)</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">{car.name}</h1>
             </div>
-            <h1 className="text-3xl font-bold text-white">{car.name}</h1>
-            <div className="absolute top-8 right-8 text-white text-3xl font-bold">
-              {car.pricePerDay} FCFA <span className="text-lg font-normal">{t('carDetail.perDay')}</span>
+            <div className="mt-4 sm:mt-0 text-center sm:text-right">
+              <div className="text-2xl sm:text-3xl font-bold text-white">
+                {car.pricePerDay} <span className="text-lg font-normal">{t('carDetail.perDay')}</span>
+              </div>
             </div>
           </div>
 
