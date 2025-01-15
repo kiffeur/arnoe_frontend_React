@@ -55,14 +55,15 @@ const SearchResults = () => {
     'Limbé', 
     'Ebolowa', 
     'Kumba', 
-    'Foumban',
-    'Yaoundé'
+    'Foumban'
+    
   ];
 
   const flexDestinations = [
     'Douala', 
     'Kribi', 
-    'Edéa'
+    'Edéa',
+    'Yaoundé'
   ];
 
   const handleDestinationChange = (destination) => {

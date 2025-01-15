@@ -20,7 +20,6 @@ const locations = [
   "Yaoundé",
   "Bafoussam",
   "Bamenda",
-  "Bertoua",
   "Buea",
   "Kribi",
   "Limbé",
