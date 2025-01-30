@@ -317,13 +317,16 @@ const BookingSummary = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="mt-8 flex justify-center space-x-4">
-              <button 
-                onClick={generatePDF} 
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
-              >
-                {t('bookingSummary.downloadPdf')}
-              </button>
+            <div className="flex space-x-4 mt-6">
+              {/* Bouton de téléchargement de facture masqué */}
+              {false && (
+                <button 
+                  onClick={generatePDF} 
+                  className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
+                >
+                  {t('bookingSummary.downloadPdf')}
+                </button>
+              )}
               <button 
                 onClick={() => navigate('/')} 
                 className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition"
