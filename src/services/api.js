@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://monkfish-app-k34hb.ondigitalocean.app';
+const API_BASE_URL = 'https://coral-app-pfkut.ondigitalocean.app';
 
 const handleResponse = async (response) => {
   if (response.status === 401) {
