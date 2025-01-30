@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   FaCarSide,
   FaCarAlt,
+  FaCar,
   FaGem,
   FaTruck,
   FaCircle,
@@ -20,20 +21,29 @@ const CarTypes = () => {
     { 
       id: 1, 
       name: t('carTypes.berline.name'), 
-      icon: FaCarAlt,
+      icon: FaCar,
       description: t('carTypes.berline.description'),
       filterType: 'berline',
       gradient: 'from-blue-500 via-blue-600 to-indigo-700',
       shadowColor: 'shadow-blue-500/30'
     },
     { 
-      id: 2, 
-      name: t('carTypes.suv.name'), 
+      id: 5, 
+      name: 'SUV 5 places', 
       icon: FaCarSide,
-      description: t('carTypes.suv.description'),
-      filterType: 'suv',
-      gradient: 'from-purple-500 via-purple-600 to-purple-800',
-      shadowColor: 'shadow-purple-500/30'
+      description: 'Pafait pour 5 personnes',
+      filterType: 'suv_5_places',
+      gradient: 'from-indigo-500 via-indigo-600 to-indigo-800',
+      shadowColor: 'shadow-indigo-500/30'
+    },
+    { 
+      id: 6, 
+      name: 'SUV 7 places', 
+      icon: FaCarAlt,
+      description: 'Confortable pour 7 personnes',
+      filterType: 'suv_7_places',
+      gradient: 'from-teal-500 via-teal-600 to-teal-800',
+      shadowColor: 'shadow-teal-500/30'
     },
     { 
       id: 3, 
@@ -60,6 +70,8 @@ const CarTypes = () => {
     const carTypeMap = {
       'berline': 'Berline',
       'suv': 'SUV 5 places', // ou 'SUV 7 places' selon votre besoin
+      'suv_5_places': 'SUV 5 places',
+      'suv_7_places': 'SUV 7 places',
       'pickup': 'Pickup',
       'premium': 'Premium'
     };
@@ -98,7 +110,7 @@ const CarTypes = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
           {carTypes.map((car) => (
             <motion.div
               key={car.id}
@@ -111,7 +123,7 @@ const CarTypes = () => {
               data-aos-delay={car.id * 100}
             >
               <div 
-                className={`bg-gradient-to-br ${car.gradient} rounded-2xl p-8 shadow-lg transform transition-all duration-500 ${car.shadowColor} hover:shadow-2xl cursor-pointer overflow-hidden`}
+                className={`bg-gradient-to-br ${car.gradient} rounded-2xl p-8 shadow-lg transform transition-all duration-500 ${car.shadowColor} hover:shadow-2xl cursor-pointer overflow-hidden h-full`}
               >
                 <div className="relative z-10">
                   {/* Cercles décoratifs */}
