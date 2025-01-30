@@ -56,10 +56,24 @@ const CarTypes = () => {
   ];
 
   const handleCarTypeClick = (filterType) => {
-    console.log('Type de voiture sélectionné:', filterType);
+    // Mapper les types de CarTypes aux types de SearchResults
+    const carTypeMap = {
+      'berline': 'Berline',
+      'suv': 'SUV 5 places', // ou 'SUV 7 places' selon votre besoin
+      'pickup': 'Pickup',
+      'premium': 'Premium'
+    };
+
+    const mappedCarType = carTypeMap[filterType] || filterType;
+    
+    console.log('Type de voiture sélectionné:', {
+      original: filterType,
+      mapped: mappedCarType
+    });
+
     navigate('/search', { 
       state: { 
-        carType: filterType,
+        carType: mappedCarType,
         fromCarTypes: true
       } 
     });

@@ -131,22 +131,57 @@ const SearchResults = () => {
   const filteredCars = cars.filter((car) => {
     // Filtre par type de voiture
     const matchCarType = !filters.carType || car.carType === filters.carType;
+    console.log('Car Type Filter:', {
+      filterCarType: filters.carType,
+      carCarType: car.carType,
+      matchCarType
+    });
     
     // Filtre par nombre de sièges
     const matchSeats = !filters.seats || car.seats.toString() === filters.seats;
+    console.log('Seats Filter:', {
+      filterSeats: filters.seats,
+      carSeats: car.seats,
+      matchSeats
+    });
     
     // Filtre par destination
     const matchDestination = !filters.destination || 
       (flexDestinations.includes(filters.destination) || 
        (require4x4Destinations.includes(filters.destination) && car.is4x4));
+    console.log('Destination Filter:', {
+      filterDestination: filters.destination,
+      carDestination: car.destination,
+      matchDestination
+    });
     
     // Filtre par 4x4
     const match4x4 = !filters.is4x4 || car.is4x4;
+    console.log('4x4 Filter:', {
+      filter4x4: filters.is4x4,
+      car4x4: car.is4x4,
+      match4x4
+    });
     
     // Autres filtres
     const matchAC = !filters.hasAC || car.hasAC;
+    console.log('AC Filter:', {
+      filterAC: filters.hasAC,
+      carAC: car.hasAC,
+      matchAC
+    });
     const matchRearCamera = !filters.hasRearCamera || car.hasRearCamera;
+    console.log('Rear Camera Filter:', {
+      filterRearCamera: filters.hasRearCamera,
+      carRearCamera: car.hasRearCamera,
+      matchRearCamera
+    });
     const matchTouchScreen = !filters.hasTouchScreen || car.hasTouchScreen;
+    console.log('Touch Screen Filter:', {
+      filterTouchScreen: filters.hasTouchScreen,
+      carTouchScreen: car.hasTouchScreen,
+      matchTouchScreen
+    });
 
     return matchCarType && 
            matchSeats && 
